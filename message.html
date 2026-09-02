@@ -1,3 +1,781 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Message Arun4ever</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>*{box-sizing:border-box;margin:0;padding:0}:root{--p:#f7f5f0;--i:#171513;--l:#dedad1;--m:#77736c;--g:#b18a4e;--r:#b7192f}body{min-height:100vh;background:linear-gradient(135deg,#f7f5f0,#ede8df);font:13px Poppins,sans-serif;color:var(--i)}.hide{display:none!important}.shell{width:min(100%,720px);min-height:100vh;margin:auto;padding:25px 16px;display:flex;align-items:center}.card{width:100%;overflow:hidden;border:1px solid var(--l);border-radius:14px;background:#fffdf9;box-shadow:0 20px 60px #2f241e1f}.top{display:flex;gap:13px;align-items:center;padding:20px 23px;border-bottom:1px solid var(--l)}.ava{height:42px;width:42px;display:grid;place-items:center;border-radius:50%;background:#1d1a1b;color:#fff;font:700 24px 'Cormorant Garamond',serif}.top h1,.intro h2{font-family:'Cormorant Garamond',serif;font-weight:700}.top h1{font-size:28px;line-height:1}.top p,.sub,.hint,.note{color:var(--m);font-size:10px}.top p{margin-top:4px}.intro{padding:38px 30px}.eyebrow{color:var(--g);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase}.intro h2{margin-top:8px;font-size:39px;line-height:.96}.intro>.sub{margin:13px 0 23px;font-size:12px;line-height:1.8}.box{padding:17px;border:1px solid var(--l);border-radius:10px;background:#faf8f3}.label{display:block;margin-bottom:8px;font-size:11px;font-weight:600}.input,.text{width:100%;border:1px solid var(--l);border-radius:7px;background:#fff;padding:12px;color:var(--i);font:13px Poppins,sans-serif;outline:none}.input:focus,.text:focus{border-color:var(--g);box-shadow:0 0 0 3px #b18a4e22}.hint{margin-top:8px}.warning{margin-top:15px;padding:11px 12px;border-left:3px solid var(--g);background:#f6f0e4;color:#746551;font-size:10px;line-height:1.7}.btn{width:100%;margin-top:17px;padding:12px;border:0;border-radius:7px;background:#1d1a1b;color:#fff;font:600 12px Poppins,sans-serif;cursor:pointer}.error{margin-top:10px;color:var(--r);font-size:11px;line-height:1.6}.chat{height:min(690px,calc(100vh - 50px));display:flex;flex-direction:column}.chathead{display:flex;gap:11px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--l)}.back{border:0;background:none;cursor:pointer}.title{font-weight:600}.messages{flex:1;overflow:auto;padding:18px;background:#f8f6f1}.empty{margin:38px auto;color:var(--m);font-size:11px;line-height:1.8;text-align:center}.msg{max-width:78%;margin:7px 0;padding:10px 12px;border:1px solid var(--l);border-radius:12px;font-size:12px;line-height:1.55;white-space:pre-wrap;word-break:break-word;background:#fff}.mine{margin-left:auto;border:0;background:#24201e;color:#fff}.time{display:block;margin-top:4px;opacity:.6;font-size:8px}.send{display:flex;gap:8px;padding:12px;border-top:1px solid var(--l)}.text{height:44px;resize:none;padding:11px}.sendbtn{width:44px;border:0;border-radius:8px;background:#1d1a1b;color:#fff;cursor:pointer}.note{padding:0 18px 13px;text-align:center}@media(max-width:500px){.shell{padding:0}.card{min-height:100vh;border:0;border-radius:0}.chat{height:100vh}.intro{padding:33px 21px}}</style></head><body><div class="shell"><div class="card"><div class="top"><div class="ava">A</div><div><h1>Arun4ever</h1><p>Private message inbox</p></div></div><section class="intro" id="setup"><div class="eyebrow">Private conversation</div><h2>Want to talk with Arun4ever?</h2><p class="sub">Message here. Choose a username, then start your private conversation.</p><div class="box"><label class="label">Choose your username</label><input id="username" class="input" maxlength="22" autocomplete="nickname"><p class="hint">Use 3–22 letters, numbers, spaces, _ or .</p></div><div class="warning"><b>Please be respectful.</b><br>Spam, harassment, inappropriate names, impersonation, abusive and sexual content are not allowed. Messages may be removed and users may be banned. Never share passwords, OTPs, bank details, addresses, or private information.</div><p id="error" class="error hide"></p><button id="go" class="btn">Continue to chat <i class="fa-solid fa-arrow-right"></i></button></section><section id="chat" class="chat hide"><div class="chathead"><button id="back" class="back"><i class="fa-solid fa-chevron-left"></i></button><div><div class="title">Message Arun4ever</div><div class="hint">Private conversation</div></div></div><div id="messages" class="messages"><div class="empty">Connecting to chat…</div></div><div class="send"><textarea id="text" class="text" maxlength="700" placeholder="Write a message…"></textarea><button id="send" class="sendbtn"><i class="fa-solid fa-paper-plane"></i></button></div><p class="note">Be respectful. Inappropriate messages can be removed and accounts can be blocked.</p></section></div></div><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script><script src="firebase-config.js"></script><script>
-(()=>{const $=x=>document.getElementById(x);let uid,db,ref;const bad=['admin','moderator','arun4ever official'],clean=x=>x.replace(/\s+/g,' ').trim(),valid=x=>/^[a-zA-Z0-9_. -]{3,22}$/.test(x),esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),tm=x=>x?new Date(x).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';function fail(x){$('error').textContent=x;$('error').classList.remove('hide')}async function open(n){$('error').classList.add('hide');if(!valid(n))return fail('Use 3–22 letters, numbers, spaces, _ or . only.');if(bad.includes(n.toLowerCase()))return fail('Please choose a different username.');try{ref=db.ref('chats/'+uid);await ref.update({username:n,updatedAt:firebase.database.ServerValue.TIMESTAMP});localStorage.setItem('arun4ever_message_username',n);$('setup').classList.add('hide');$('chat').classList.remove('hide');ref.child('messages').on('value',s=>{let a=s.val()||{},ids=Object.keys(a).sort((x,y)=>(a[x].createdAt||0)-(a[y].createdAt||0));$('messages').innerHTML=ids.length?ids.map(id=>{let m=a[id];return '<div class="msg '+(m.sender==='user'?'mine':'')+'">'+esc(m.text||'')+'<span class="time">'+tm(m.createdAt)+'</span></div>'}).join(''):'<div class="empty">Say hello to Arun4ever 👋<br>Your messages are sent live.</div>';$('messages').scrollTop=$('messages').scrollHeight},e=>{$('messages').innerHTML='<div class="empty">Chat permission error:<br>'+esc(e.message)+'</div>'})}catch(e){fail('Chat could not open: '+e.message)}}async function connect(){if(!window.IS_CONFIGURED)return fail('Firebase config is not connected.');try{await firebase.auth().signInAnonymously();uid=firebase.auth().currentUser.uid;db=firebase.database();if((await db.ref('bans/'+uid).once('value')).exists())return fail('This browser is blocked from messaging.');let n=localStorage.getItem('arun4ever_message_username');if(n){$('username').value=n;open(n)}}catch(e){fail('Firebase connection error: '+e.message)}}$('go').onclick=()=>open(clean($('username').value));$('username').onkeydown=e=>{if(e.key==='Enter')$('go').click()};$('back').onclick=()=>{$('chat').classList.add('hide');$('setup').classList.remove('hide')};async function send(){let t=clean($('text').value);if(!t||!ref)return;$('send').disabled=true;try{await ref.child('messages').push({text:t,sender:'user',createdAt:firebase.database.ServerValue.TIMESTAMP});await ref.update({updatedAt:firebase.database.ServerValue.TIMESTAMP});$('text').value=''}catch(e){alert('Message failed: '+e.message)}finally{$('send').disabled=false}}$('send').onclick=send;$('text').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};connect()})();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Arun4ever | Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --paper: #f7f5f0;
+      --ink: #171513;
+      --line: #dedad1;
+      --muted: #77736c;
+      --gold: #b18a4e;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Poppins", sans-serif;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    /*
+      SMALLER PROFILE LAYOUT
+
+      Main profile width: 360px
+      Side profile width: 190px
+
+      This keeps your GIF smaller and sharper.
+    */
+    .page {
+      width: 100%;
+      margin: 25px 0;
+      padding-left: 16px;
+
+      display: grid;
+      grid-template-columns: 360px 190px;
+      gap: 25px;
+
+      align-items: start;
+    }
+
+    .panel {
+      position: relative;
+      overflow: visible;
+
+      border: 1px solid var(--line);
+      border-radius: 8px;
+
+      background: #fffdf9;
+      box-shadow: 0 12px 30px rgba(46, 35, 21, 0.07);
+    }
+
+    /*
+      CLEAN FULL GIF BANNER
+
+      No blurred background
+      No duplicated GIF
+      No black area
+      No forced fixed height
+      No cropping
+      No zoom
+    */
+    .banner {
+      width: 100%;
+      overflow: hidden;
+
+      border-radius: 7px 7px 0 0;
+      background: transparent;
+      line-height: 0;
+    }
+
+    .banner-img {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      object-fit: contain;
+      object-position: center;
+
+      image-rendering: auto;
+      transform: translateZ(0);
+    }
+
+    .fallback {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      overflow: hidden;
+
+      background: linear-gradient(
+        120deg,
+        #23162b,
+        #684633 48%,
+        #153c40
+      );
+    }
+
+    .fallback::before {
+      content: "";
+
+      position: absolute;
+      top: -75px;
+      left: 8%;
+
+      width: 170px;
+      height: 170px;
+
+      border-radius: 50%;
+      background: #bd8d48;
+      filter: blur(48px);
+      opacity: 0.7;
+    }
+
+    .head {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      align-items: flex-end;
+      gap: 11px;
+
+      min-height: 123px;
+      padding: 0 14px 14px;
+    }
+
+    /*
+      Larger PFP with white border.
+      It can overlap the GIF banner without being cut.
+    */
+    .avatar {
+      width: 112px;
+      height: 112px;
+      flex: none;
+
+      margin-top: -48px;
+
+      overflow: hidden;
+
+      border: 4px solid #ffffff;
+      border-radius: 50%;
+
+      background: linear-gradient(135deg, #37244d, #1e6670);
+
+      box-shadow:
+        0 13px 27px rgba(0, 0, 0, 0.26),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+
+    .avatar img {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .letter {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+
+      color: #fff7ec;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 57px;
+      font-weight: 700;
+    }
+
+    .has-img img {
+      display: block;
+    }
+
+    .has-img .letter {
+      display: none;
+    }
+
+    .identity {
+      min-width: 0;
+      padding-bottom: 1px;
+    }
+
+    .name {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 31px;
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: 0.4px;
+    }
+
+    .tagline {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 9.5px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 7px;
+    }
+
+    .pill {
+      padding: 5px 7px;
+
+      border: 1px solid var(--line);
+      border-radius: 999px;
+
+      background: #ffffff;
+      color: #5d5850;
+
+      font-size: 8px;
+      white-space: nowrap;
+    }
+
+    .message-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 9px;
+      padding: 6px 9px;
+
+      border: 1px solid #1d1a1b;
+      border-radius: 999px;
+
+      background: #1d1a1b;
+      color: #ffffff;
+
+      font-size: 8.5px;
+      font-weight: 600;
+      text-decoration: none;
+
+      transition: 0.2s ease;
+    }
+
+    .message-btn:hover {
+      transform: translateY(-2px);
+      background: #39312c;
+    }
+
+    /*
+      Longer lower profile section.
+    */
+    .content {
+      min-height: 540px;
+      border-top: 1px solid var(--line);
+      padding: 22px 15px 25px;
+    }
+
+    .label {
+      margin-bottom: 8px;
+
+      color: var(--gold);
+
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .bio {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.34;
+      white-space: pre-line;
+    }
+
+    .bar {
+      width: 35px;
+      height: 2px;
+      margin: 14px 0;
+
+      background: var(--gold);
+    }
+
+    .detail {
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.7;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      margin-top: 18px;
+    }
+
+    .skill {
+      padding: 5px 8px;
+
+      border: 1px solid var(--line);
+      border-radius: 4px;
+
+      background: #faf8f3;
+      color: #504b45;
+
+      font-size: 9px;
+    }
+
+    .side {
+      padding-top: 6px;
+    }
+
+    .side-title {
+      margin-bottom: 7px;
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .side-text {
+      margin-bottom: 15px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    .rule {
+      height: 1px;
+      margin-bottom: 14px;
+      background: var(--line);
+    }
+
+    .socials {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 5px;
+
+      border: 1px solid transparent;
+      border-radius: 6px;
+
+      color: #4c4842;
+      font-size: 10px;
+      text-decoration: none;
+
+      transition: 0.2s ease;
+    }
+
+    .social i {
+      width: 14px;
+      color: var(--gold);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .social:hover {
+      border-color: var(--line);
+      background: #fffdf9;
+    }
+
+    .pin {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      width: 100%;
+      margin-top: 14px;
+      padding: 9px;
+
+      border-radius: 5px;
+      background: #b7192f;
+
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .pin.show {
+      display: flex;
+    }
+
+    .music {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+
+      width: 42px;
+      height: 42px;
+
+      border: 0;
+      border-radius: 50%;
+
+      background: #19171b;
+      color: #ffffff;
+
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    @media (max-width: 650px) {
+      .page {
+        grid-template-columns: 360px;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .page {
+        grid-template-columns: 1fr;
+        margin: 13px 0;
+        padding: 0 9px;
+      }
+
+      .head {
+        min-height: 137px;
+        gap: 10px;
+        padding: 0 13px 13px;
+      }
+
+      .avatar {
+        width: 98px;
+        height: 98px;
+        margin-top: -42px;
+        border-width: 3px;
+      }
+
+      .letter {
+        font-size: 50px;
+      }
+
+      .name {
+        font-size: 29px;
+      }
+
+      .content {
+        min-height: 0;
+        padding: 20px 14px 25px;
+      }
+
+      .bio {
+        font-size: 21px;
+      }
+
+      .side {
+        padding: 2px 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <section class="panel">
+
+      <div class="banner">
+        <img
+          id="bannerImg"
+          class="banner-img hide"
+          alt="Animated banner"
+        >
+
+        <div id="fallback" class="fallback"></div>
+      </div>
+
+      <div class="head">
+
+        <div id="avatar" class="avatar">
+          <img id="avatarImg" alt="Profile picture">
+          <div id="letter" class="letter">A</div>
+        </div>
+
+        <div class="identity">
+
+          <h1 id="name" class="name">Arun4ever</h1>
+
+          <p id="tagline" class="tagline">
+            Creative Web Developer
+          </p>
+
+          <div class="meta">
+            <span id="mood" class="pill">😎 Creative</span>
+            <span id="location" class="pill">📍 Ahmedabad, India</span>
+          </div>
+
+          <a href="message.html" class="message-btn">
+            <i class="fa-solid fa-message"></i>
+            Message me
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="content">
+
+        <div class="label">A little introduction</div>
+
+        <p id="bio" class="bio"></p>
+
+        <div class="bar"></div>
+
+        <p class="detail">
+          A personal space for ideas, creative work, and everything I am building.
+        </p>
+
+        <div id="skills" class="skills"></div>
+
+      </div>
+
+    </section>
+
+    <aside class="side">
+
+      <h2 class="side-title">Arun4ever</h2>
+
+      <p class="side-text">
+        Explore my work, ideas and social links.
+      </p>
+
+      <div class="rule"></div>
+
+      <div class="label">Find me online</div>
+
+      <div id="socials" class="socials"></div>
+
+      <a id="pin" class="pin" target="_blank" rel="noopener">
+        <i class="fa-brands fa-pinterest"></i>
+        Follow on Pinterest
+      </a>
+
+    </aside>
+
+  </main>
+
+  <button id="music" class="music hide">♪</button>
+
+  <audio id="audio" loop preload="none"></audio>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const DEFAULTS = {
+        name: "Arun4ever",
+        taglines: ["Creative Web Developer"],
+        bio: "Welcome to my corner of the internet. I enjoy creating thoughtful websites, animations and digital experiences.",
+        mood: "Creative",
+        moodEmoji: "😎",
+        location: "Ahmedabad, India 🇮🇳",
+        avatar: "",
+        banner: "",
+        music: "",
+        skills: "HTML, CSS, JavaScript, Firebase, Web Design",
+
+        socials: {
+          pinterest: "",
+          instagram: "",
+          github: "",
+          youtube: "",
+          whatsapp: "",
+          telegram: "",
+          twitter: "",
+          email: "",
+          website: ""
+        }
+      };
+
+      const SOCIALS = {
+        pinterest: ["fa-brands fa-pinterest", "Pinterest"],
+        instagram: ["fa-brands fa-instagram", "Instagram"],
+        github: ["fa-brands fa-github", "GitHub"],
+        youtube: ["fa-brands fa-youtube", "YouTube"],
+        whatsapp: ["fa-brands fa-whatsapp", "WhatsApp"],
+        telegram: ["fa-brands fa-telegram", "Telegram"],
+        twitter: ["fa-brands fa-x-twitter", "X / Twitter"],
+        email: ["fa-solid fa-envelope", "Email"],
+        website: ["fa-solid fa-globe", "Website"]
+      };
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"]/g, (character) => {
+          return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;"
+          }[character];
+        });
+      }
+
+      function makeUrl(value) {
+        return /^https?:\/\//i.test(value)
+          ? value
+          : "https://" + value;
+      }
+
+      function socialUrl(type, value) {
+        if (type === "email") {
+          return "mailto:" + value;
+        }
+
+        if (
+          type === "whatsapp" &&
+          /^\+?\d[\d -]+$/.test(value)
+        ) {
+          return "https://wa.me/" + value.replace(/\D/g, "");
+        }
+
+        return makeUrl(value);
+      }
+
+      function renderProfile(value) {
+        const profile = Object.assign({}, DEFAULTS, value || {});
+
+        profile.socials = Object.assign(
+          {},
+          DEFAULTS.socials,
+          (value && value.socials) || {}
+        );
+
+        document.title = profile.name + " | Profile";
+
+        $("name").textContent = profile.name;
+
+        $("letter").textContent =
+          (profile.name.trim()[0] || "A").toUpperCase();
+
+        $("tagline").textContent =
+          Array.isArray(profile.taglines) && profile.taglines[0]
+            ? profile.taglines[0]
+            : "Creative Web Developer";
+
+        if (profile.avatar) {
+          $("avatarImg").src = profile.avatar;
+          $("avatar").classList.add("has-img");
+        } else {
+          $("avatar").classList.remove("has-img");
+        }
+
+        if (profile.banner) {
+          $("bannerImg").src = profile.banner;
+          $("bannerImg").classList.remove("hide");
+          $("fallback").classList.add("hide");
+        } else {
+          $("bannerImg").classList.add("hide");
+          $("fallback").classList.remove("hide");
+        }
+
+        $("mood").textContent =
+          ((profile.moodEmoji || "") + " " + (profile.mood || "")).trim()
+          || "😎 Creative";
+
+        $("location").textContent =
+          "📍 " + (profile.location || "Somewhere on Earth");
+
+        $("bio").textContent = profile.bio || "";
+
+        const skills = String(profile.skills || "")
+          .split(",")
+          .map((skill) => skill.trim())
+          .filter(Boolean);
+
+        $("skills").innerHTML = skills
+          .map((skill) => {
+            return `<span class="skill">${escapeHtml(skill)}</span>`;
+          })
+          .join("");
+
+        let socialHtml = "";
+
+        Object.keys(SOCIALS).forEach((key) => {
+          const value = String(profile.socials[key] || "").trim();
+
+          if (!value) return;
+
+          const social = SOCIALS[key];
+
+          socialHtml += `
+            <a
+              class="social"
+              href="${escapeHtml(socialUrl(key, value))}"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="${social[0]}"></i>
+              <span>${social[1]}</span>
+            </a>
+          `;
+        });
+
+        $("socials").innerHTML = socialHtml;
+
+        const pinterest = String(profile.socials.pinterest || "").trim();
+
+        if (pinterest) {
+          $("pin").href = makeUrl(pinterest);
+          $("pin").classList.add("show");
+        } else {
+          $("pin").classList.remove("show");
+        }
+
+        if (profile.music) {
+          $("audio").src = profile.music;
+          $("music").classList.remove("hide");
+        } else {
+          $("music").classList.add("hide");
+        }
+      }
+
+      let playing = false;
+
+      $("music").addEventListener("click", () => {
+        const audio = $("audio");
+
+        if (playing) {
+          audio.pause();
+        } else {
+          audio.play().catch(() => {});
+        }
+
+        playing = !playing;
+      });
+
+      if (window.IS_CONFIGURED && window.firebase) {
+        firebase.database().ref("profile").on(
+          "value",
+          (snapshot) => {
+            renderProfile(snapshot.val());
+          },
+          () => {
+            renderProfile(null);
+          }
+        );
+      } else {
+        renderProfile(null);
+      }
+    })();
+  </script>
+
+</body>
+</html>
