@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07070f">
+<meta name="robots" content="noindex">
+<title>Arun4ever — Admin Panel 🔐</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--c1:#8b5cf6;--c2:#06b6d4;--c3:#f472b6;--glass:rgba(255,255,255,.05);--border:rgba(255,255,255,.13);--text:#eef0ff;--muted:#a7abc9}
+body{font-family:'Poppins',sans-serif;background:#07070f;color:var(--text);min-height:100vh}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.4;z-index:0;pointer-events:none;animation:floaty 16s ease-in-out infinite}
+.blob.b1{width:400px;height:400px;background:#7c3aed;top:-120px;left:-120px}
+.blob.b2{width:360px;height:360px;background:#0891b2;bottom:-110px;right:-100px;animation-delay:-5s}
+@keyframes floaty{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-40px) scale(1.15)}}
+.wrap{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px 16px}
+.auth-card{width:100%;max-width:400px;padding:38px 30px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);text-align:center}
+.auth-logo{width:70px;height:70px;margin:0 auto 14px;border-radius:20px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(139,92,246,.5)}50%{transform:scale(1.05);box-shadow:0 0 0 22px rgba(139,92,246,0)}}
+.auth-card h1{font-size:21px}
+.auth-card .sub{font-size:12.5px;color:var(--muted);margin:4px 0 22px}
+.field{width:100%;margin-top:12px;text-align:left}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:.4px}
+.field input,.field textarea{width:100%;padding:12px 14px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .25s,box-shadow .25s}
+.field input:focus,.field textarea:focus{border-color:var(--c1);box-shadow:0 0 0 3px rgba(139,92,246,.18)}
+.field textarea{resize:vertical;min-height:74px}
+.field.pin input{border-color:rgba(230,0,35,.5)}
+.field.pin input:focus{border-color:#e60023;box-shadow:0 0 0 3px rgba(230,0,35,.18)}
+.hint{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+.btn-main{width:100%;margin-top:18px;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.25s}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(139,92,246,.4)}
+.btn-main:disabled{opacity:.6;cursor:wait}
+.error{margin-top:12px;padding:10px 14px;border-radius:12px;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.4);color:#fda4af;font-size:12.5px;line-height:1.6}
+.back{display:inline-block;margin-top:18px;font-size:12.5px;color:var(--muted);text-decoration:none}
+.back:hover{color:#fff}
+.dash{position:relative;z-index:2;max-width:880px;margin:0 auto;padding:28px 16px 130px}
+.dash-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.dash-head .auth-logo{margin:0;width:54px;height:54px;font-size:18px;border-radius:16px;animation:none}
+.dash-head h1{font-size:21px}
+.dash-head .sub{font-size:12px;color:var(--muted)}
+.spacer{flex:1}
+.head-btn{padding:10px 16px;border-radius:12px;border:1px solid var(--border);background:var(--glass);color:var(--text);text-decoration:none;font-size:13px;font-family:inherit;cursor:pointer;transition:.25s}
+.head-btn:hover{background:rgba(255,255,255,.12)}
+.head-btn.danger:hover{border-color:rgba(244,63,94,.6);color:#fda4af}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid.two{grid-template-columns:1fr 1fr;gap:0 12px}
+.panel{padding:20px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--border);backdrop-filter:blur(14px)}
+.panel h2{font-size:15px;margin-bottom:6px}
+.panel.full{grid-column:1/-1}
+.preview-img{margin-top:10px;width:100%;height:110px;object-fit:cover;border-radius:14px;border:1px solid var(--border);display:none}
+.preview-img.show{display:block;animation:chipin .4s}
+#prevAvatar{width:110px;height:110px;border-radius:50%}
+@keyframes chipin{from{opacity:0;transform:translateY(10px)}}
+.emoji-picker{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.emoji-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--glass);font-size:17px;cursor:pointer;transition:.2s}
+.emoji-btn:hover{transform:scale(1.15);border-color:var(--c1)}
+.save-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:14px 16px;background:rgba(7,7,15,.85);backdrop-filter:blur(14px);border-top:1px solid var(--border);display:flex;justify-content:center}
+.save-bar .btn-main{max-width:320px;margin:0}
+.setup-note{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:15px;line-height:2.1;color:var(--muted);z-index:10}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(90px);z-index:60;padding:12px 22px;border-radius:999px;background:rgba(15,15,35,.92);border:1px solid rgba(6,182,212,.5);color:#fff;font-size:13.5px;opacity:0;transition:.35s;pointer-events:none;text-align:center;max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.bad{border-color:rgba(244,63,94,.6)}
+.hidden{display:none!important}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.grid.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div><div class="blob b2"></div>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginView" class="wrap">
+  <div class="auth-card">
+    <div class="auth-logo">A4</div>
+    <h1>Arun4ever Admin</h1>
+    <div class="sub">Only the boss can enter 😎</div>
+    <div class="field"><label>Admin Email</label><input id="email" type="email" placeholder="you@email.com" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input id="pass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+    <div id="authError" class="error hidden"></div>
+    <button id="loginBtn" class="btn-main">🔓 Login</button>
+    <a class="back" href="index.html">← Back to my profile</a>
+  </div>
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div id="dashView" class="dash hidden">
+  <div class="dash-head">
+    <div class="auth-logo">A4</div>
+    <div>
+      <h1>Admin Panel</h1>
+      <div class="sub">Arun4ever controls everything from here 😎</div>
+    </div>
+    <div class="spacer"></div>
+    <a class="head-btn" href="index.html" target="_blank">👁 View site</a>
+    <button class="head-btn danger" id="btnLogout">🚪 Logout</button>
+  </div>
+
+  <div class="grid">
+
+    <div class="panel full">
+      <h2>👤 Profile</h2>
+      <div class="field"><label>Your name</label><input id="inName" type="text" placeholder="Arun4ever"></div>
+      <div class="field"><label>Taglines — one per line, they type themselves on your page ⌨️</label>
+        <textarea id="inTaglines" rows="3" placeholder="Creative Web Developer 💻&#10;Building websites from another level ✨"></textarea>
+      </div>
+      <div class="field"><label>Bio</label><textarea id="inBio" rows="4" placeholder="Tell the world about you..."></textarea></div>
+    </div>
+
+    <div class="panel">
+      <h2>😊 Mood &amp; Location</h2>
+      <div class="field"><label>Mood</label><input id="inMood" type="text" placeholder="Creative"></div>
+      <div class="field"><label>Mood emoji</label><input id="inMoodEmoji" type="text" placeholder="😎">
+        <div class="emoji-picker" id="emojiPicker"></div>
+      </div>
+      <div class="field"><label>Location</label><input id="inLocation" type="text" placeholder="Ahmedabad, India 🇮🇳"></div>
+    </div>
+
+    <div class="panel">
+      <h2>🖼️ Images</h2>
+      <div class="field"><label>Profile picture URL</label><input id="inAvatar" type="url" placeholder="https://... (GIF = animated 🔥)">
+        <img id="prevAvatar" class="preview-img" alt="avatar preview">
+        <div class="hint">Tip: upload a GIF at imgbb.com → copy the <b>direct link</b> → animated profile pic ✨</div>
+      </div>
+      <div class="field"><label>Banner URL</label><input id="inBanner" type="url" placeholder="https://...">
+        <img id="prevBanner" class="preview-img" alt="banner preview">
+        <div class="hint">Wide image (1000×300 or bigger) looks best. GIF works here too!</div>
+      </div>
+    </div>
+
+    <div class="panel full">
+      <h2>🔗 Social links (leave empty = hidden on page)</h2>
+      <div class="grid two">
+        <div class="field pin"><label>📌 Pinterest (your main one ❤️)</label><input id="inPinterest" type="url" placeholder="https://in.pinterest.com/yourname"></div>
+        <div class="field"><label>Instagram</label><input id="inInstagram" type="url" placeholder="https://instagram.com/..."></div>
+        <div class="field"><label>GitHub</label><input id="inGithub" type="url" placeholder="https://github.com/..."></div>
+        <div class="field"><label>YouTube</label><input id="inYoutube" type="url" placeholder="https://youtube.com/@..."></div>
+        <div class="field"><label>WhatsApp (number or link)</label><input id="inWhatsapp" type="text" placeholder="919876543210"></div>
+        <div class="field"><label>Telegram</label><input id="inTelegram" type="url" placeholder="https://t.me/..."></div>
+        <div class="field"><label>X / Twitter</label><input id="inTwitter" type="url" placeholder="https://x.com/..."></div>
+        <div class="field"><label>Email</label><input id="inEmail" type="text" placeholder="you@email.com"></div>
+        <div class="field"><label>Website</label><input id="inWebsite" type="url" placeholder="https://your-site.com"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>✨ Extra</h2>
+      <div class="field"><label>Skills (comma separated)</label><input id="inSkills" type="text" placeholder="HTML, CSS, JavaScript, Firebase"></div>
+      <div class="field"><label>Background music URL (optional)</label><input id="inMusic" type="url" placeholder="https://.../song.mp3">
+        <div class="hint">Direct .mp3 link → a 🎵 button appears on your page.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>🔑 Password</h2>
+      <div class="field"><label>Current password</label><input id="passCur" type="password" autocomplete="current-password"></div>
+      <div class="field"><label>New password (min 6 characters)</label><input id="passNew" type="password" autocomplete="new-password"></div>
+      <button class="head-btn" id="btnChangePass" style="margin-top:14px">🔐 Change password</button>
+    </div>
+
+  </div>
+
+  <div class="save-bar"><button id="btnSave" class="btn-main">💾 Save Changes</button></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+(function(){
+'use strict';
+var $ = function(id){ return document.getElementById(id); };
+var cap = function(s){ return s.charAt(0).toUpperCase() + s.slice(1); };
+var SOCIAL_KEYS = ['pinterest','instagram','github','youtube','whatsapp','telegram','twitter','email','website'];
+
+if (!window.IS_CONFIGURED){
+  document.body.innerHTML = '<div class="setup-note">⚠️ Firebase is not connected yet.<br><br>Open <b>firebase-config.js</b> and paste your Firebase config.<br>Full steps are in <b>README.md</b> 📖</div>';
+  return;
+}
+
+var auth = firebase.auth();
+var db = firebase.database();
+
+var toastTimer;
+function toast(msg, ok){
+  var t = $('toast');
+  t.textContent = msg;
+  t.classList.remove('bad');
+  if (ok === false) t.classList.add('bad');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+/* ---------- LOGIN / LOGOUT ---------- */
+auth.onAuthStateChanged(function(user){
+  if (user){
+    $('loginView').classList.add('hidden');
+    $('dashView').classList.remove('hidden');
+    if (!window.__profileLoaded){ window.__profileLoaded = true; loadProfile(); }
+  } else {
+    $('dashView').classList.add('hidden');
+    $('loginView').classList.remove('hidden');
+  }
+});
+
+function doLogin(){
+  var em = $('email').value.trim(), pw = $('pass').value, err = $('authError');
+  if (!em || !pw){ err.textContent = 'Please type your email and password ✍️'; err.classList.remove('hidden'); return; }
+  var btn = $('loginBtn');
+  btn.disabled = true; btn.textContent = 'Checking…';
+  auth.signInWithEmailAndPassword(em, pw).then(function(){
+    err.classList.add('hidden');
+    $('pass').value = '';
+    btn.disabled = false; btn.textContent = '🔓 Login';
+  }).catch(function(e){
+    btn.disabled = false; btn.textContent = '🔓 Login';
+    var map = {
+      'auth/invalid-email':'That email looks wrong 🤔',
+      'auth/user-not-found':'No admin user found. Create one: Firebase → Authentication → Users → Add user ➕',
+      'auth/wrong-password':'Wrong password! Try again 🔐',
+      'auth/invalid-credential':'Wrong email or password 🔐',
+      'auth/invalid-login-credentials':'Wrong email or password 🔐',
+      'auth/too-many-requests':'Too many tries — please wait a bit ⏳',
+      'auth/operation-not-allowed':'First enable Email/Password in Firebase → Authentication → Sign-in method ⚠️',
+      'auth/network-request-failed':'Check your internet connection 📶'
+    };
+    err.textContent = map[e.code] || ('Login failed: ' + (e.message || 'unknown error'));
+    err.classList.remove('hidden');
+  });
+}
+$('loginBtn').addEventListener('click', doLogin);
+$('pass').addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
+$('btnLogout').addEventListener('click', function(){
+  auth.signOut().then(function(){ toast('Logged out 👋'); });
+});
+
+/* ---------- LOAD PROFILE INTO FORM ---------- */
+function setVal(id, v){
+  var el = $(id);
+  if (!el) return;
+  if (document.activeElement !== el) el.value = (v == null ? '' : String(v));
+}
+function preview(inId, prevId){
+  var url = $(inId).value.trim(), img = $(prevId);
+  if (url){ img.src = url; img.classList.add('show'); img.onerror = function(){ img.classList.remove('show'); }; }
+  else img.classList.remove('show');
+}
+[['inAvatar','prevAvatar'],['inBanner','prevBanner']].forEach(function(pair){
+  $(pair[0]).addEventListener('input', function(){ preview(pair[0], pair[1]); });
+});
+
+var EMOJIS = ['😊','😎','🔥','✨','🚀','🌙','💤','🎧','❤️','🤔','😇','😍','🥳','🤖','☕','🌧️'];
+$('emojiPicker').innerHTML = EMOJIS.map(function(e){
+  return '<button type="button" class="emoji-btn">' + e + '</button>';
+}).join('');
+$('emojiPicker').addEventListener('click', function(e){
+  if (e.target.classList.contains('emoji-btn')) $('inMoodEmoji').value = e.target.textContent;
+});
+
+function loadProfile(){
+  db.ref('profile').on('value', function(snap){
+    var p = snap.val() || {};
+    setVal('inName', p.name);
+    setVal('inTaglines', Array.isArray(p.taglines) ? p.taglines.join('\n') : '');
+    setVal('inBio', p.bio);
+    setVal('inMood', p.mood);
+    setVal('inMoodEmoji', p.moodEmoji);
+    setVal('inLocation', p.location);
+    setVal('inAvatar', p.avatar);
+    setVal('inBanner', p.banner);
+    setVal('inSkills', p.skills);
+    setVal('inMusic', p.music);
+    var s = p.socials || {};
+    SOCIAL_KEYS.forEach(function(k){ setVal('in' + cap(k), s[k]); });
+    preview('inAvatar','prevAvatar');
+    preview('inBanner','prevBanner');
+  }, function(err){
+    toast('Could not read database: ' + err.message, false);
+  });
+}
+
+/* ---------- SAVE ---------- */
+$('btnSave').addEventListener('click', function(){
+  var taglines = $('inTaglines').value.split('\n').map(function(t){ return t.trim(); }).filter(Boolean);
+  var profile = {
+    name: $('inName').value.trim() || 'Arun4ever',
+    taglines: taglines.length ? taglines : ['Creative Web Developer 💻'],
+    bio: $('inBio').value.trim(),
+    mood: $('inMood').value.trim(),
+    moodEmoji: $('inMoodEmoji').value.trim(),
+    location: $('inLocation').value.trim(),
+    avatar: $('inAvatar').value.trim(),
+    banner: $('inBanner').value.trim(),
+    music: $('inMusic').value.trim(),
+    skills: $('inSkills').value.trim(),
+    socials: {}
+  };
+  SOCIAL_KEYS.forEach(function(k){ profile.socials[k] = ($('in' + cap(k)).value || '').trim(); });
+
+  var btn = $('btnSave');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  db.ref('profile').set(profile).then(function(){
+    btn.disabled = false; btn.textContent = '💾 Save Changes';
+    toast('Saved! Open your site — it updates live ✅');
+  }).catch(function(e){
+    btn.disabled = false; btn.textContent = '💾 Save Changes';
+    toast('Save failed: ' + e.message, false);
+  });
+});
+
+/* ---------- CHANGE PASSWORD ---------- */
+$('btnChangePass').addEventListener('click', function(){
+  var cur = $('passCur').value, nw = $('passNew').value, user = auth.currentUser;
+  if (!user){ toast('Login first 🙂', false); return; }
+  if (nw.length < 6){ toast('New password needs 6+ characters ✍️', false); return; }
+  var btn = $('btnChangePass');
+  btn.disabled = true;
+  var cred = firebase.auth.EmailAuthProvider.credential(user.email, cur);
+  user.reauthenticateWithCredential(cred).then(function(){
+    return user.updatePassword(nw);
+  }).then(function(){
+    btn.disabled = false;
+    $('passCur').value = ''; $('passNew').value = '';
+    toast('Password changed 🔐✅');
+  }).catch(function(e){
+    btn.disabled = false;
+    var wrong = (e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential');
+    toast('Could not change: ' + (wrong ? 'your current password is wrong' : e.message), false);
+  });
+});
+})();
+</script>
+</body>
+</html>
