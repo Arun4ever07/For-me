@@ -3,28 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="theme-color" content="#f7f5f0">
   <title>Arun4ever | Profile</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --paper: #f7f5f0;
@@ -41,14 +29,9 @@
       font-family: "Poppins", sans-serif;
     }
 
-    .hide {
-      display: none !important;
-    }
+    .hide { display: none !important; }
 
-    /*
-      Compact left-side profile layout.
-      It is narrow but the PFP is now large and balanced.
-    */
+    /* Narrow profile panel, positioned close to the left side. */
     .page {
       width: 100%;
       margin: 28px 0;
@@ -68,13 +51,7 @@
       box-shadow: 0 14px 35px rgba(46, 35, 21, 0.07);
     }
 
-    /*
-      Natural banner GIF:
-      - No forced height
-      - No crop
-      - No zoom
-      - Full GIF view
-    */
+    /* GIF keeps natural proportions: no fixed height, crop, zoom, or blur filter. */
     .banner {
       position: relative;
       width: 100%;
@@ -99,12 +76,7 @@
       position: relative;
       height: 140px;
       overflow: hidden;
-      background: linear-gradient(
-        120deg,
-        #23162b,
-        #684633 48%,
-        #153c40
-      );
+      background: linear-gradient(120deg, #23162b, #684633 48%, #153c40);
     }
 
     .fallback::before {
@@ -120,11 +92,6 @@
       opacity: 0.7;
     }
 
-    /*
-      Profile section.
-      Avatar is large: 128px.
-      Panel overflow is visible, so it cannot get cut.
-    */
     .head {
       position: relative;
       z-index: 2;
@@ -144,9 +111,7 @@
       border: 5px solid #ffffff;
       border-radius: 50%;
       background: linear-gradient(135deg, #37244d, #1e6670);
-      box-shadow:
-        0 15px 32px rgba(0, 0, 0, 0.28),
-        0 0 0 1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 15px 32px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.06);
     }
 
     .avatar img {
@@ -167,18 +132,10 @@
       font-weight: 700;
     }
 
-    .has-img img {
-      display: block;
-    }
+    .has-img img { display: block; }
+    .has-img .letter { display: none; }
 
-    .has-img .letter {
-      display: none;
-    }
-
-    .identity {
-      min-width: 0;
-      padding-bottom: 2px;
-    }
+    .identity { min-width: 0; padding-bottom: 2px; }
 
     .name {
       font-family: "Cormorant Garamond", Georgia, serif;
@@ -211,9 +168,29 @@
       white-space: nowrap;
     }
 
-    /*
-      Longer lower section.
-    */
+    .message-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 7px 11px;
+      border: 1px solid #1d1a1b;
+      border-radius: 999px;
+      background: #1d1a1b;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .message-btn:hover {
+      transform: translateY(-2px);
+      background: #39312c;
+      box-shadow: 0 7px 14px rgba(29, 26, 27, 0.18);
+    }
+
+    /* Taller lower profile section. */
     .content {
       min-height: 530px;
       border-top: 1px solid var(--line);
@@ -266,12 +243,7 @@
       font-size: 9.5px;
     }
 
-    /*
-      Right-side social area.
-    */
-    .side {
-      padding-top: 7px;
-    }
+    .side { padding-top: 7px; }
 
     .side-title {
       margin-bottom: 7px;
@@ -340,9 +312,7 @@
       text-decoration: none;
     }
 
-    .pin.show {
-      display: flex;
-    }
+    .pin.show { display: flex; }
 
     .music {
       position: fixed;
@@ -385,38 +355,21 @@
         border-width: 4px;
       }
 
-      .letter {
-        font-size: 55px;
-      }
-
-      .name {
-        font-size: 32px;
-      }
-
-      .tagline {
-        font-size: 9.5px;
-      }
-
-      .meta {
-        margin-top: 7px;
-      }
+      .letter { font-size: 55px; }
+      .name { font-size: 32px; }
+      .tagline { font-size: 9.5px; }
+      .meta { margin-top: 7px; }
 
       .content {
         min-height: 0;
         padding: 21px 15px 26px;
       }
 
-      .bio {
-        font-size: 22px;
-      }
-
-      .side {
-        padding: 2px 7px;
-      }
+      .bio { font-size: 22px; }
+      .side { padding: 2px 7px; }
     }
   </style>
 </head>
-
 <body>
 
   <main class="page">
@@ -424,12 +377,7 @@
     <section class="panel">
 
       <div class="banner">
-        <img
-          id="bannerImg"
-          class="banner-img hide"
-          alt="Animated banner"
-        >
-
+        <img id="bannerImg" class="banner-img hide" alt="Animated banner">
         <div id="fallback" class="fallback"></div>
       </div>
 
@@ -451,12 +399,16 @@
             <span id="mood" class="pill">😎 Creative</span>
             <span id="location" class="pill">📍 Ahmedabad, India</span>
           </div>
+
+          <a href="message.html" class="message-btn">
+            <i class="fa-solid fa-message"></i>
+            Message me
+          </a>
         </div>
 
       </div>
 
       <div class="content">
-
         <div class="label">A little introduction</div>
 
         <p id="bio" class="bio"></p>
@@ -468,13 +420,11 @@
         </p>
 
         <div id="skills" class="skills"></div>
-
       </div>
 
     </section>
 
     <aside class="side">
-
       <h2 class="side-title">Arun4ever</h2>
 
       <p class="side-text">
@@ -487,38 +437,30 @@
 
       <div id="socials" class="socials"></div>
 
-      <a
-        id="pin"
-        class="pin"
-        target="_blank"
-        rel="noopener"
-      >
+      <a id="pin" class="pin" target="_blank" rel="noopener">
         <i class="fa-brands fa-pinterest"></i>
         Follow on Pinterest
       </a>
-
     </aside>
 
   </main>
 
   <button id="music" class="music hide">♪</button>
-
   <audio id="audio" loop preload="none"></audio>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-
   <script src="firebase-config.js"></script>
 
   <script>
     (() => {
+      "use strict";
+
       const $ = (id) => document.getElementById(id);
 
       const DEFAULTS = {
         name: "Arun4ever",
-        taglines: [
-          "Creative Web Developer"
-        ],
+        taglines: ["Creative Web Developer"],
         bio: "Welcome to my corner of the internet. I enjoy creating thoughtful websites, animations and digital experiences.",
         mood: "Creative",
         moodEmoji: "😎",
@@ -554,12 +496,12 @@
       };
 
       function escapeHtml(value) {
-        return String(value).replace(/[&<>"]/g, (character) => {
+        return String(value).replace(/[&<>\"]/g, (character) => {
           return {
             "&": "&amp;",
             "<": "&lt;",
             ">": "&gt;",
-            '"': "&quot;"
+            "\"": "&quot;"
           }[character];
         });
       }
@@ -575,10 +517,7 @@
           return "mailto:" + value;
         }
 
-        if (
-          type === "whatsapp" &&
-          /^\+?\d[\d -]+$/.test(value)
-        ) {
+        if (type === "whatsapp" && /^\+?\d[\d -]+$/.test(value)) {
           return "https://wa.me/" + value.replace(/\D/g, "");
         }
 
@@ -597,16 +536,12 @@
         document.title = profile.name + " | Profile";
 
         $("name").textContent = profile.name;
+        $("letter").textContent = (profile.name.trim()[0] || "A").toUpperCase();
 
-        $("letter").textContent =
-          (profile.name.trim()[0] || "A").toUpperCase();
-
-        const firstTagline =
-          Array.isArray(profile.taglines) && profile.taglines[0]
+        $("tagline").textContent =
+          (Array.isArray(profile.taglines) && profile.taglines[0])
             ? profile.taglines[0]
             : "Creative Web Developer";
-
-        $("tagline").textContent = firstTagline;
 
         if (profile.avatar) {
           $("avatarImg").src = profile.avatar;
@@ -639,9 +574,7 @@
           .filter(Boolean);
 
         $("skills").innerHTML = skillList
-          .map((skill) => {
-            return `<span class="skill">${escapeHtml(skill)}</span>`;
-          })
+          .map((skill) => `<span class="skill">${escapeHtml(skill)}</span>`)
           .join("");
 
         let socialHtml = "";
@@ -668,9 +601,7 @@
 
         $("socials").innerHTML = socialHtml;
 
-        const pinterest = String(
-          profile.socials.pinterest || ""
-        ).trim();
+        const pinterest = String(profile.socials.pinterest || "").trim();
 
         if (pinterest) {
           $("pin").href = makeUrl(pinterest);
@@ -702,18 +633,11 @@
       });
 
       if (window.IS_CONFIGURED && window.firebase) {
-        firebase
-          .database()
-          .ref("profile")
-          .on(
-            "value",
-            (snapshot) => {
-              renderProfile(snapshot.val());
-            },
-            () => {
-              renderProfile(null);
-            }
-          );
+        firebase.database().ref("profile").on(
+          "value",
+          (snapshot) => renderProfile(snapshot.val()),
+          () => renderProfile(null)
+        );
       } else {
         renderProfile(null);
       }
