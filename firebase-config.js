@@ -5,7 +5,7 @@ const firebaseConfig = {
   // IMPORTANT:
   // Replace the value below with the EXACT URL from
   // Firebase → Build → Realtime Database.
-  databaseURL: "https://console.firebase.google.com/u/1/project/forme-49a8f/database/forme-49a8f-default-rtdb/data/~2F",
+databaseURL: "https://forme-49a8f-default-rtdb.firebaseio.com",
 
   projectId: "forme-49a8f",
   storageBucket: "forme-49a8f.firebasestorage.app",
