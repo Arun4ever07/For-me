@@ -1,25 +1,15 @@
 /* =====================================================
-   ARUN4EVER — FIREBASE CONFIG
-   -----------------------------------------------------
-   HOW TO FILL THIS (one time only):
-   1) Go to https://console.firebase.google.com
-   2) Project Overview → Web icon (</>) → register app
-   3) Copy the firebaseConfig values and paste below
-   4) databaseURL is a MUST — copy it from the top of
-      your Realtime Database page if it is missing.
-      It looks like: https://xxxx.firebaseio.com
-      or:            https://xxxx.firebasedatabase.app
-   Full steps: see README.md
+
    ===================================================== */
 
 const firebaseConfig = {
-  apiKey: "PASTE_YOURS_HERE",
-  authDomain: "PASTE_YOURS_HERE",
-  databaseURL: "PASTE_YOURS_HERE",
-  projectId: "PASTE_YOURS_HERE",
-  storageBucket: "PASTE_YOURS_HERE",
-  messagingSenderId: "PASTE_YOURS_HERE",
-  appId: "PASTE_YOURS_HERE"
+  apiKey: "AIzaSyB4G_QC1pbk4YrG-cVTQ9SQdKACoX3FZI0",
+  authDomain: "forme-49a8f.firebaseapp.com",
+  projectId: "forme-49a8f",
+  storageBucket: "forme-49a8f.firebasestorage.app",
+  messagingSenderId: "571753173003",
+  appId: "1:571753173003:web:77fde3d8c277ab59f7370e",
+  measurementId: "G-58CLSBNW23"
 };
 
 /* Don't touch anything below this line */
