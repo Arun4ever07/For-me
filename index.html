@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-
   <meta name="p:domain_verify" content="c4bc0e531a41b1e5abb998e8ca500b83">
 
   <meta charset="utf-8">
@@ -23,11 +22,7 @@
   >
 
   <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+    *{box-sizing:border-box;margin:0;padding:0}
 
     :root{
       --paper:#f7f5f0;
@@ -36,8 +31,7 @@
       --muted:#77736c;
       --accent:#b18a4e;
       --card:#fffdf9;
-      --shadow:rgba(46,35,21,.10);
-
+      --shadow:rgba(46,35,21,.12);
       --body-font:Poppins,sans-serif;
       --title-font:"Cormorant Garamond",serif;
     }
@@ -55,12 +49,10 @@
       --muted:#aaa9b1;
       --accent:#8297ff;
       --card:#191a20;
-      --shadow:rgba(0,0,0,.25);
+      --shadow:rgba(0,0,0,.28);
     }
 
-    .hide{
-      display:none !important;
-    }
+    .hide{display:none!important}
 
     .loader{
       position:fixed;
@@ -120,7 +112,7 @@
 
     .banner{
       position:relative;
-      height:175px;
+      height:180px;
       overflow:hidden;
       border-radius:11px 11px 0 0;
       background:linear-gradient(120deg,#23162b,#684633 48%,#153c40);
@@ -133,7 +125,7 @@
       background:linear-gradient(
         180deg,
         transparent 45%,
-        rgba(0,0,0,.22)
+        rgba(0,0,0,.25)
       );
       pointer-events:none;
     }
@@ -151,33 +143,41 @@
       background:linear-gradient(120deg,#23162b,#684633 48%,#153c40);
     }
 
+    /*
+      Discord profile-image position:
+      Banner = 180px high.
+      Avatar = 126px high.
+      margin-top = -63px.
+      Therefore exactly half of avatar is inside banner,
+      and half remains below banner.
+    */
     .head{
       position:relative;
       display:flex;
       align-items:flex-end;
       gap:14px;
-      min-height:145px;
-      padding:0 18px 17px;
+      min-height:150px;
+      padding:0 18px 18px;
     }
 
     .avatar{
       position:relative;
-      z-index:2;
-      width:124px;
-      height:124px;
+      z-index:5;
+      width:126px;
+      height:126px;
       flex:none;
-      margin-top:-62px;
+      margin-top:-63px;
       overflow:hidden;
       border:5px solid var(--card);
       border-radius:50%;
       background:#37244d;
-      box-shadow:0 13px 27px rgba(0,0,0,.26);
+      box-shadow:0 14px 30px rgba(0,0,0,.30);
       transition:transform .3s ease,box-shadow .3s ease;
     }
 
     .avatar:hover{
       transform:translateY(-4px) rotate(-1deg);
-      box-shadow:0 18px 34px rgba(0,0,0,.3);
+      box-shadow:0 20px 38px rgba(0,0,0,.32);
     }
 
     .avatar img{
@@ -237,7 +237,7 @@
     }
 
     .content{
-      min-height:450px;
+      min-height:430px;
       padding:23px 18px;
       border-top:1px solid var(--line);
     }
@@ -305,15 +305,11 @@
     }
 
     .work{
-      position:relative;
       overflow:hidden;
       border:1px solid var(--line);
       border-radius:10px;
       background:var(--card);
-      transition:
-        transform .28s ease,
-        box-shadow .28s ease,
-        border-color .28s ease;
+      transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
     }
 
     .work:hover{
@@ -324,35 +320,50 @@
 
     .work:active{
       transform:translateY(-1px) scale(.985);
-      box-shadow:0 6px 14px var(--shadow);
     }
 
+    /*
+      No aspect-ratio property.
+      No fixed height.
+      No crop.
+      Every Work photo uses its original ratio.
+    */
     .work-gallery{
       position:relative;
       width:100%;
-      aspect-ratio:16/10;
       overflow:hidden;
-      background:#17151a;
+      background:#101116;
+      line-height:0;
     }
 
     .work-slide{
-      position:absolute;
-      inset:0;
+      display:none;
       width:100%;
-      height:100%;
+      height:auto;
+      max-width:100%;
       object-fit:contain;
-      opacity:0;
-      transform:scale(1.02);
-      transition:opacity .8s ease,transform 2.4s ease;
+      background:#101116;
     }
 
     .work-slide.active{
-      opacity:1;
-      transform:scale(1);
+      display:block;
+      animation:classicFade .7s ease;
     }
 
     .work:hover .work-slide.active{
-      transform:scale(1.035);
+      animation:classicFade .7s ease;
+    }
+
+    @keyframes classicFade{
+      from{
+        opacity:0;
+        transform:scale(1.02);
+      }
+
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
     }
 
     .gallery-count{
@@ -360,15 +371,12 @@
       z-index:3;
       top:9px;
       right:9px;
-      display:flex;
-      align-items:center;
-      gap:5px;
       padding:5px 7px;
       border-radius:999px;
-      background:rgba(0,0,0,.58);
+      background:rgba(0,0,0,.60);
       color:#fff;
       font-size:8px;
-      backdrop-filter:blur(6px);
+      line-height:1;
     }
 
     .gallery-dots{
@@ -387,7 +395,7 @@
       height:5px;
       border-radius:50%;
       background:rgba(255,255,255,.45);
-      transition:transform .25s ease,background .25s ease;
+      transition:.25s ease;
     }
 
     .gallery-dot.active{
@@ -399,19 +407,19 @@
       position:absolute;
       z-index:4;
       top:50%;
-      right:8px;
+      right:9px;
       display:grid;
-      width:28px;
-      height:28px;
+      width:29px;
+      height:29px;
       place-items:center;
       border:0;
       border-radius:50%;
-      background:rgba(0,0,0,.52);
+      background:rgba(0,0,0,.55);
       color:#fff;
       cursor:pointer;
       opacity:0;
       transform:translateY(-50%);
-      transition:opacity .25s ease,transform .25s ease;
+      transition:.25s ease;
     }
 
     .work:hover .gallery-next{
@@ -419,7 +427,7 @@
     }
 
     .gallery-next:hover{
-      transform:translateY(-50%) scale(1.08);
+      transform:translateY(-50%) scale(1.1);
     }
 
     .work-body{
@@ -501,7 +509,7 @@
 
     .music{
       position:fixed;
-      z-index:8;
+      z-index:20;
       right:18px;
       bottom:18px;
       width:44px;
@@ -544,17 +552,17 @@
       }
 
       .banner{
-        height:150px;
+        height:154px;
       }
 
       .avatar{
-        width:105px;
-        height:105px;
+        width:106px;
+        height:106px;
         margin-top:-53px;
       }
 
       .head{
-        min-height:135px;
+        min-height:137px;
         padding-right:13px;
         padding-left:13px;
       }
@@ -595,6 +603,7 @@
             alt="Profile picture"
             referrerpolicy="no-referrer"
           >
+
           <div id="letter" class="letter">A</div>
         </div>
 
@@ -647,12 +656,7 @@
 
   </main>
 
-  <button
-    id="music"
-    class="music hide"
-    type="button"
-    aria-label="Play music"
-  >
+  <button id="music" class="music hide" type="button">
     ♪
   </button>
 
@@ -689,7 +693,7 @@
         customLinks: []
       };
 
-      const fontOptions = {
+      const fonts = {
         "Poppins": "Poppins,sans-serif",
         "Inter": "Inter,sans-serif",
         "DM Sans": "\"DM Sans\",sans-serif",
@@ -735,11 +739,9 @@
 
         if (!url) return "";
 
-        if (/^https?:\/\//i.test(url)) {
-          return url;
-        }
-
-        return "https://" + url;
+        return /^https?:\/\//i.test(url)
+          ? url
+          : "https://" + url;
       }
 
       function socialURL(platform, value) {
@@ -804,7 +806,7 @@
         image.src = safeURL(url);
       }
 
-      function workImages(work) {
+      function getWorkImages(work) {
         const images = [];
 
         if (Array.isArray(work.images)) {
@@ -815,33 +817,33 @@
           });
         }
 
-        if (work.image && typeof work.image === "string") {
-          if (!images.includes(work.image.trim())) {
-            images.unshift(work.image.trim());
-          }
+        if (
+          work.image &&
+          typeof work.image === "string" &&
+          !images.includes(work.image.trim())
+        ) {
+          images.unshift(work.image.trim());
         }
 
         return images;
       }
 
-      function createWorkCard(work, workNumber) {
-        const images = workImages(work);
+      function workCard(work) {
+        const images = getWorkImages(work);
 
-        const slides = images
-          .map((image, imageIndex) => {
-            return `
-              <img
-                class="work-slide ${imageIndex === 0 ? "active" : ""}"
-                src="${escapeHTML(safeURL(image))}"
-                alt="${escapeHTML(work.title)} image ${imageIndex + 1}"
-                loading="lazy"
-                referrerpolicy="no-referrer"
-              >
-            `;
-          })
-          .join("");
+        const photoHTML = images.map((image, index) => {
+          return `
+            <img
+              class="work-slide ${index === 0 ? "active" : ""}"
+              src="${escapeHTML(safeURL(image))}"
+              alt="${escapeHTML(work.title)} photo ${index + 1}"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            >
+          `;
+        }).join("");
 
-        const dots = images.length > 1
+        const dotsHTML = images.length > 1
           ? `
             <div class="gallery-dots">
               ${images.map((_, index) => `
@@ -851,7 +853,7 @@
           `
           : "";
 
-        const counter = images.length > 1
+        const countHTML = images.length > 1
           ? `
             <span class="gallery-count">
               <i class="fa-regular fa-images"></i>
@@ -860,30 +862,26 @@
           `
           : "";
 
-        const nextButton = images.length > 1
+        const nextHTML = images.length > 1
           ? `
-            <button
-              class="gallery-next"
-              type="button"
-              aria-label="Show next image"
-            >
+            <button class="gallery-next" type="button">
               <i class="fa-solid fa-chevron-right"></i>
             </button>
           `
           : "";
 
-        const gallery = images.length
+        const galleryHTML = images.length
           ? `
-            <div class="work-gallery" data-work="${workNumber}">
-              ${slides}
-              ${counter}
-              ${dots}
-              ${nextButton}
+            <div class="work-gallery">
+              ${photoHTML}
+              ${countHTML}
+              ${dotsHTML}
+              ${nextHTML}
             </div>
           `
           : "";
 
-        const link = work.link
+        const linkHTML = work.link
           ? `
             <a
               class="work-link"
@@ -899,62 +897,64 @@
 
         return `
           <article class="work">
-            ${gallery}
+            ${galleryHTML}
 
             <div class="work-body">
-              <h3 class="work-title">${escapeHTML(work.title)}</h3>
+              <h3 class="work-title">
+                ${escapeHTML(work.title)}
+              </h3>
 
               <p class="work-caption">
                 ${escapeHTML(work.caption || "")}
               </p>
 
-              ${link}
+              ${linkHTML}
             </div>
           </article>
         `;
       }
 
-      function startGalleryAnimations() {
+      function startGalleries() {
         document.querySelectorAll(".work-gallery").forEach(gallery => {
           const slides = [...gallery.querySelectorAll(".work-slide")];
           const dots = [...gallery.querySelectorAll(".gallery-dot")];
-          const currentNumber = gallery.querySelector(".galleryCurrent");
+          const count = gallery.querySelector(".galleryCurrent");
           const nextButton = gallery.querySelector(".gallery-next");
 
           if (slides.length < 2) return;
 
-          let activeIndex = 0;
+          let active = 0;
           let timer;
 
-          function showSlide(index) {
-            activeIndex = index;
+          function show(index) {
+            active = index;
 
             slides.forEach((slide, slideIndex) => {
-              slide.classList.toggle("active", slideIndex === activeIndex);
+              slide.classList.toggle("active", slideIndex === active);
             });
 
             dots.forEach((dot, dotIndex) => {
-              dot.classList.toggle("active", dotIndex === activeIndex);
+              dot.classList.toggle("active", dotIndex === active);
             });
 
-            if (currentNumber) {
-              currentNumber.textContent = activeIndex + 1;
+            if (count) {
+              count.textContent = active + 1;
             }
           }
 
-          function nextSlide() {
-            showSlide((activeIndex + 1) % slides.length);
+          function next() {
+            show((active + 1) % slides.length);
           }
 
-          function startTimer() {
+          function start() {
             clearInterval(timer);
 
             timer = setInterval(() => {
-              nextSlide();
+              next();
             }, 3500);
           }
 
-          function stopTimer() {
+          function stop() {
             clearInterval(timer);
           }
 
@@ -963,54 +963,50 @@
               event.preventDefault();
               event.stopPropagation();
 
-              nextSlide();
-              startTimer();
+              next();
+              start();
             });
           }
 
-          gallery.addEventListener("mouseenter", stopTimer);
-          gallery.addEventListener("mouseleave", startTimer);
+          gallery.addEventListener("mouseenter", stop);
+          gallery.addEventListener("mouseleave", start);
 
-          gallery.addEventListener("touchstart", stopTimer, {
+          gallery.addEventListener("touchstart", stop, {
             passive: true
           });
 
-          gallery.addEventListener("touchend", startTimer, {
+          gallery.addEventListener("touchend", start, {
             passive: true
           });
 
-          startTimer();
+          show(0);
+          start();
         });
       }
 
-      function render(profileData) {
-        const profile = Object.assign({}, defaults, profileData || {});
-
+      function render(data) {
+        const profile = Object.assign({}, defaults, data || {});
         const socials = Object.assign(
           {},
           defaults.socials,
-          (profileData && profileData.socials) || {}
+          (data && data.socials) || {}
         );
 
         document.body.className =
-          "theme-" + (profile.theme === "default" ? "default" : "classic");
-
-        const bodyFont =
-          fontOptions[profile.profileFont] ||
-          fontOptions[defaults.profileFont];
-
-        const titleFont =
-          fontOptions[profile.titleFont] ||
-          fontOptions[defaults.titleFont];
+          "theme-" + (
+            profile.theme === "default"
+              ? "default"
+              : "classic"
+          );
 
         document.documentElement.style.setProperty(
           "--body-font",
-          bodyFont
+          fonts[profile.profileFont] || fonts.Poppins
         );
 
         document.documentElement.style.setProperty(
           "--title-font",
-          titleFont
+          fonts[profile.titleFont] || fonts["Cormorant Garamond"]
         );
 
         $("name").textContent = profile.name || defaults.name;
@@ -1044,29 +1040,27 @@
           .split(",")
           .map(skill => skill.trim())
           .filter(Boolean)
-          .map(skill => {
-            return `<span class="skill">${escapeHTML(skill)}</span>`;
-          })
+          .map(skill => `
+            <span class="skill">${escapeHTML(skill)}</span>
+          `)
           .join("");
 
         const works = Array.isArray(profile.works)
           ? profile.works
           : [];
 
-        const workCards = works
-          .filter(work => work && work.title)
-          .map((work, index) => createWorkCard(work, index))
-          .join("");
-
         $("works").innerHTML =
-          workCards ||
+          works
+            .filter(work => work && work.title)
+            .map(workCard)
+            .join("") ||
           `
             <div class="empty">
               Work cards will appear here after they are added from the admin panel.
             </div>
           `;
 
-        startGalleryAnimations();
+        startGalleries();
 
         let socialHTML = "";
 
@@ -1097,26 +1091,24 @@
 
         const customHTML = customLinks
           .filter(item => item && item.label && item.url)
-          .map(item => {
-            return `
-              <a
-                class="social"
-                href="${escapeHTML(safeURL(item.url))}"
-                target="_blank"
-                rel="noopener"
-              >
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                ${escapeHTML(item.label)}
-              </a>
-            `;
-          })
+          .map(item => `
+            <a
+              class="social"
+              href="${escapeHTML(safeURL(item.url))}"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              ${escapeHTML(item.label)}
+            </a>
+          `)
           .join("");
 
         $("customLinks").innerHTML = customHTML;
         $("customWrap").classList.toggle("hide", !customHTML);
 
-        const musicButton = $("music");
         const audio = $("audio");
+        const musicButton = $("music");
 
         if (profile.music) {
           audio.src = safeURL(profile.music);
@@ -1135,19 +1127,19 @@
 
       $("music").addEventListener("click", () => {
         const audio = $("audio");
-        const musicButton = $("music");
+        const button = $("music");
 
         if (playing) {
           audio.pause();
           playing = false;
-          musicButton.classList.remove("playing");
+          button.classList.remove("playing");
           return;
         }
 
         audio.play()
           .then(() => {
             playing = true;
-            musicButton.classList.add("playing");
+            button.classList.add("playing");
           })
           .catch(() => {});
       });
