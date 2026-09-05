@@ -3,359 +3,363 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
   <title>Arun4ever Admin</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --bg:#101116;
+      --card:#191a20;
+      --card2:#13141a;
+      --line:#30323d;
+      --muted:#a6a7b1;
+      --blue:#8297ff;
+      --green:#3abf7a;
+      --red:#ff9ba4;
     }
 
-    :root {
-      --bg: #101116;
-      --card: #191a20;
-      --card2: #13141a;
-      --line: #30323d;
-      --muted: #a6a7b1;
-      --blue: #8297ff;
-      --green: #3abf7a;
-      --red: #ff9ba4;
+    body{
+      min-width:320px;
+      background:var(--bg);
+      color:#f4f3f8;
+      font:13px Poppins,sans-serif;
     }
 
-    body {
-      min-width: 320px;
-      background: var(--bg);
-      color: #f4f3f8;
-      font: 13px Poppins, sans-serif;
+    .hide{display:none!important}
+
+    .wrap{
+      max-width:1120px;
+      margin:auto;
+      padding:28px 16px 105px;
     }
 
-    .hide {
-      display: none !important;
+    .login{
+      width:min(100%,400px);
+      margin:10vh auto;
+      padding:30px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--card);
     }
 
-    .wrap {
-      max-width: 1120px;
-      margin: auto;
-      padding: 28px 16px 105px;
+    h1{
+      font:700 36px/1 "Cormorant Garamond",serif;
     }
 
-    .login {
-      width: min(100%, 400px);
-      margin: 10vh auto;
-      padding: 30px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--card);
+    .sub{
+      margin:8px 0 18px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.65;
     }
 
-    h1 {
-      font: 700 36px/1 "Cormorant Garamond", serif;
+    .input,.text,select{
+      width:100%;
+      margin-top:7px;
+      padding:11px;
+      border:1px solid var(--line);
+      border-radius:7px;
+      outline:none;
+      background:#111218;
+      color:#fff;
+      font:12px Poppins,sans-serif;
     }
 
-    .sub {
-      margin: 8px 0 18px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.65;
+    .text{
+      min-height:78px;
+      resize:vertical;
     }
 
-    .input,
-    .text,
-    select {
-      width: 100%;
-      margin-top: 7px;
-      padding: 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      outline: none;
-      background: #111218;
-      color: #fff;
-      font: 12px Poppins, sans-serif;
+    .input:focus,.text:focus,select:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px #8297ff18;
     }
 
-    .text {
-      min-height: 78px;
-      resize: vertical;
+    .btn{
+      margin-top:13px;
+      padding:10px 14px;
+      border:0;
+      border-radius:7px;
+      background:var(--blue);
+      color:#fff;
+      cursor:pointer;
+      font:600 11px Poppins,sans-serif;
+      transition:.2s;
     }
 
-    .input:focus,
-    .text:focus,
-    select:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px #8297ff18;
+    .btn:hover{
+      filter:brightness(1.12);
+      transform:translateY(-1px);
     }
 
-    .btn {
-      margin-top: 13px;
-      padding: 10px 14px;
-      border: 0;
-      border-radius: 7px;
-      background: var(--blue);
-      color: #fff;
-      cursor: pointer;
-      font: 600 11px Poppins, sans-serif;
-      transition: .2s;
+    .btn:disabled{
+      cursor:not-allowed;
+      opacity:.6;
     }
 
-    .btn:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
+    .secondary{
+      background:#30334a;
     }
 
-    .btn:disabled {
-      cursor: not-allowed;
-      opacity: .6;
-      transform: none;
+    .remove{
+      border:0;
+      background:transparent;
+      color:var(--red);
+      cursor:pointer;
+      font:11px Poppins,sans-serif;
     }
 
-    .err {
-      margin-top: 9px;
-      color: var(--red);
-      font-size: 11px;
+    .err{
+      margin-top:9px;
+      color:var(--red);
+      font-size:11px;
     }
 
-    .head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 20px;
+    .head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:20px;
     }
 
-    .head a,
-    .out {
-      padding: 9px 11px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-      font: 11px Poppins, sans-serif;
-      text-decoration: none;
+    .head a,.out{
+      padding:9px 11px;
+      border:1px solid var(--line);
+      border-radius:6px;
+      background:transparent;
+      color:#fff;
+      cursor:pointer;
+      font:11px Poppins,sans-serif;
+      text-decoration:none;
     }
 
-    .head a:hover,
-    .out:hover {
-      border-color: var(--blue);
+    .head a:hover,.out:hover{
+      border-color:var(--blue);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
     }
 
-    .box {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      background: var(--card);
+    .box{
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:var(--card);
     }
 
-    .box.full {
-      grid-column: 1 / -1;
+    .box.full{
+      grid-column:1/-1;
     }
 
-    .box h2 {
-      font: 700 23px "Cormorant Garamond", serif;
+    .box h2{
+      font:700 23px "Cormorant Garamond",serif;
     }
 
-    .label {
-      display: block;
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 10px;
+    .label{
+      display:block;
+      margin-top:12px;
+      color:var(--muted);
+      font-size:10px;
     }
 
-    .hint {
-      margin-top: 5px;
-      color: #777985;
-      font-size: 9px;
-      line-height: 1.55;
+    .hint{
+      margin-top:5px;
+      color:#777985;
+      font-size:9px;
+      line-height:1.55;
     }
 
-    .preview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
+    .preview-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:14px;
     }
 
-    .preview {
-      min-height: 124px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--card2);
+    .preview{
+      min-height:110px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:var(--card2);
     }
 
-    .preview-title {
-      padding: 7px 9px;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 9px;
+    .preview-title{
+      padding:7px 9px;
+      border-bottom:1px solid var(--line);
+      color:var(--muted);
+      font-size:9px;
     }
 
-    .preview img {
-      display: block;
-      width: 100%;
-      max-height: 180px;
-      object-fit: contain;
-      background: #090a0e;
+    .preview img{
+      display:block;
+      width:100%;
+      max-height:190px;
+      object-fit:contain;
+      background:#090a0e;
     }
 
-    .preview-empty {
-      display: grid;
-      min-height: 92px;
-      place-items: center;
-      padding: 12px;
-      color: #777985;
-      font-size: 10px;
-      text-align: center;
+    .preview-empty{
+      display:grid;
+      min-height:88px;
+      place-items:center;
+      padding:12px;
+      color:#777985;
+      font-size:10px;
+      text-align:center;
     }
 
-    .audio-preview {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px;
+    .audio-preview{
+      padding:12px;
     }
 
-    .audio-preview audio {
-      width: 100%;
-      height: 32px;
+    .audio-preview audio{
+      width:100%;
+      height:32px;
     }
 
-    .work {
-      margin-top: 12px;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--card2);
+    .work{
+      margin-top:14px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:var(--card2);
     }
 
-    .work-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
+    .work-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size:11px;
     }
 
-    .remove {
-      border: 0;
-      background: transparent;
-      color: var(--red);
-      cursor: pointer;
-      font: 11px Poppins, sans-serif;
+    .image-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      align-items:end;
+      margin-top:9px;
+      padding:9px;
+      border:1px solid var(--line);
+      border-radius:7px;
+      background:#101116;
     }
 
-    .add {
-      background: #30334a;
+    .image-row .label{
+      margin-top:0;
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr auto;
-      gap: 8px;
-      align-items: end;
-      margin-top: 10px;
-      padding: 11px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--card2);
+    .image-row .input{
+      margin-top:5px;
     }
 
-    .row .label {
-      margin-top: 0;
+    .image-preview{
+      margin-top:8px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:7px;
+      background:#090a0e;
     }
 
-    .row .input {
-      margin-top: 5px;
+    .image-preview img{
+      display:block;
+      width:100%;
+      max-height:210px;
+      object-fit:contain;
     }
 
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
     }
 
-    .savebar {
-      position: fixed;
-      z-index: 5;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 13px;
-      border-top: 1px solid var(--line);
-      background: #101116ef;
-      text-align: center;
+    .custom-row{
+      display:grid;
+      grid-template-columns:1fr 1.5fr auto;
+      gap:8px;
+      align-items:end;
+      margin-top:10px;
+      padding:11px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:var(--card2);
     }
 
-    .savebar .btn {
-      width: min(360px, 90%);
-      margin: 0;
+    .custom-row .label{
+      margin-top:0;
     }
 
-    .ok {
-      position: fixed;
-      z-index: 8;
-      right: 15px;
-      bottom: 75px;
-      padding: 10px 13px;
-      border-radius: 7px;
-      background: #22764f;
-      color: #fff;
-      font-size: 11px;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: .3s;
+    .savebar{
+      position:fixed;
+      z-index:20;
+      right:0;
+      bottom:0;
+      left:0;
+      padding:13px;
+      border-top:1px solid var(--line);
+      background:#101116ef;
+      text-align:center;
     }
 
-    .ok.show {
-      opacity: 1;
-      transform: translateY(0);
+    .savebar .btn{
+      width:min(370px,90%);
+      margin:0;
     }
 
-    @media (max-width: 760px) {
-      .grid,
-      .social-grid {
-        grid-template-columns: 1fr;
+    .ok{
+      position:fixed;
+      z-index:30;
+      right:15px;
+      bottom:75px;
+      padding:10px 13px;
+      border-radius:7px;
+      background:#22764f;
+      color:#fff;
+      font-size:11px;
+      opacity:0;
+      transform:translateY(8px);
+      transition:.3s;
+    }
+
+    .ok.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media(max-width:760px){
+      .grid,.social-grid{
+        grid-template-columns:1fr;
       }
 
-      .box.full {
-        grid-column: auto;
+      .box.full{
+        grid-column:auto;
       }
 
-      .head {
-        align-items: flex-start;
+      .head{
+        align-items:flex-start;
       }
 
-      .row {
-        grid-template-columns: 1fr;
+      .preview-grid{
+        grid-template-columns:1fr;
       }
 
-      .preview-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .wrap {
-        padding: 20px 10px 100px;
-      }
-
-      .head h1 {
-        font-size: 31px;
+      .custom-row,.image-row{
+        grid-template-columns:1fr;
       }
     }
   </style>
@@ -369,7 +373,7 @@
       <h1>Arun4ever Admin</h1>
 
       <p class="sub">
-        Sign in to manage your profile, media, work cards and social links.
+        Sign in to manage your profile, banner, fonts, Work cards, photos and social links.
       </p>
 
       <input
@@ -402,7 +406,7 @@
           <h1>Profile studio</h1>
 
           <p class="sub">
-            Edit your website from one place. Changes are visible publicly after you save.
+            Changes are saved in Firebase and shown on your public profile.
           </p>
         </div>
 
@@ -445,18 +449,18 @@
           >
 
           <p class="hint">
-            Separate every skill using a comma.
+            Separate skills using commas.
           </p>
         </div>
 
         <div class="box">
-          <h2>Design & media</h2>
+          <h2>Design, fonts & media</h2>
 
           <label class="label">Profile image direct URL</label>
           <input
             id="avatar"
             class="input"
-            placeholder="https://example.com/photo.jpg"
+            placeholder="https://example.com/profile.jpg"
           >
 
           <label class="label">Banner GIF/image direct URL</label>
@@ -474,29 +478,46 @@
           >
 
           <label class="label">Profile layout theme</label>
-
           <select id="theme">
             <option value="classic">Classic ivory</option>
             <option value="default">Default dark</option>
           </select>
 
-          <p class="hint">
-            Use direct public image links ending in JPG, PNG, WEBP, or GIF.
-          </p>
+          <label class="label">Main website font</label>
+          <select id="profileFont">
+            <option value="Poppins">Poppins</option>
+            <option value="Inter">Inter</option>
+            <option value="DM Sans">DM Sans</option>
+            <option value="Space Grotesk">Space Grotesk</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Cormorant Garamond">Cormorant Garamond</option>
+          </select>
+
+          <label class="label">Title / heading font</label>
+          <select id="titleFont">
+            <option value="Cormorant Garamond">Cormorant Garamond</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Inter">Inter</option>
+            <option value="DM Sans">DM Sans</option>
+            <option value="Space Grotesk">Space Grotesk</option>
+          </select>
 
           <div class="preview-grid">
 
             <div class="preview">
               <div class="preview-title">PROFILE IMAGE PREVIEW</div>
+
               <div id="avatarPreview" class="preview-empty">
-                Add an image URL to preview it.
+                Add a profile image URL to preview it.
               </div>
             </div>
 
             <div class="preview">
               <div class="preview-title">BANNER PREVIEW</div>
+
               <div id="bannerPreview" class="preview-empty">
-                Add a banner URL to preview it.
+                Add a banner image URL to preview it.
               </div>
             </div>
 
@@ -535,12 +556,12 @@
           <h2>Work cards</h2>
 
           <p class="sub">
-            Create portfolio cards with an image, title, caption and direct project link.
+            Every Work card can contain many photos. The public profile automatically creates a classic fading gallery from those photos.
           </p>
 
           <div id="workList"></div>
 
-          <button id="addWork" class="btn add" type="button">
+          <button id="addWork" class="btn secondary" type="button">
             + Add work card
           </button>
         </div>
@@ -549,85 +570,22 @@
           <h2>Social media links</h2>
 
           <p class="sub">
-            Leave a field blank if you do not want that social button shown publicly.
+            Leave a social field blank to hide it from the public website.
           </p>
 
-          <div class="social-grid">
-
-            <div>
-              <label class="label">Pinterest</label>
-              <input id="pinterest" class="input" placeholder="https://pinterest.com/...">
-
-              <label class="label">Instagram</label>
-              <input id="instagram" class="input" placeholder="https://instagram.com/...">
-
-              <label class="label">Facebook</label>
-              <input id="facebook" class="input" placeholder="https://facebook.com/...">
-
-              <label class="label">LinkedIn</label>
-              <input id="linkedin" class="input" placeholder="https://linkedin.com/in/...">
-
-              <label class="label">Snapchat</label>
-              <input id="snapchat" class="input" placeholder="https://snapchat.com/add/...">
-
-              <label class="label">TikTok</label>
-              <input id="tiktok" class="input" placeholder="https://tiktok.com/@...">
-            </div>
-
-            <div>
-              <label class="label">GitHub</label>
-              <input id="github" class="input" placeholder="https://github.com/...">
-
-              <label class="label">YouTube</label>
-              <input id="youtube" class="input" placeholder="https://youtube.com/@...">
-
-              <label class="label">Discord</label>
-              <input id="discord" class="input" placeholder="https://discord.gg/...">
-
-              <label class="label">Telegram</label>
-              <input id="telegram" class="input" placeholder="https://t.me/...">
-
-              <label class="label">X / Twitter</label>
-              <input id="twitter" class="input" placeholder="https://x.com/...">
-
-              <label class="label">Threads</label>
-              <input id="threads" class="input" placeholder="https://threads.net/@...">
-            </div>
-
-            <div>
-              <label class="label">WhatsApp number or link</label>
-              <input id="whatsapp" class="input" placeholder="919876543210">
-
-              <label class="label">Email</label>
-              <input id="mail" class="input" type="email" placeholder="you@example.com">
-
-              <label class="label">Website</label>
-              <input id="website" class="input" placeholder="https://...">
-
-              <label class="label">Spotify</label>
-              <input id="spotify" class="input" placeholder="https://open.spotify.com/...">
-
-              <label class="label">Reddit</label>
-              <input id="reddit" class="input" placeholder="https://reddit.com/u/...">
-
-              <label class="label">Other link</label>
-              <input id="other" class="input" placeholder="Any extra direct URL">
-            </div>
-
-          </div>
+          <div id="socialList" class="social-grid"></div>
         </div>
 
         <div class="box full">
           <h2>Custom link manager</h2>
 
           <p class="sub">
-            Add unlimited custom links such as a portfolio, gaming profile, blog,
-            shop, donation page, resume, Discord server, or any other URL.
+            Add unlimited custom links such as your portfolio, shop, blog, gaming profile, donation page, resume, or Discord server.
           </p>
 
           <div id="customList"></div>
 
-          <button id="addCustom" class="btn add" type="button">
+          <button id="addCustom" class="btn secondary" type="button">
             + Add custom link
           </button>
         </div>
@@ -660,9 +618,32 @@
       let customLinks = [];
       let listening = false;
 
-      const text = value => String(value ?? "");
+      const socialFields = [
+        ["pinterest", "Pinterest", "https://pinterest.com/..."],
+        ["instagram", "Instagram", "https://instagram.com/..."],
+        ["facebook", "Facebook", "https://facebook.com/..."],
+        ["linkedin", "LinkedIn", "https://linkedin.com/in/..."],
+        ["snapchat", "Snapchat", "https://snapchat.com/add/..."],
+        ["tiktok", "TikTok", "https://tiktok.com/@..."],
+        ["github", "GitHub", "https://github.com/..."],
+        ["youtube", "YouTube", "https://youtube.com/@..."],
+        ["discord", "Discord", "https://discord.gg/..."],
+        ["telegram", "Telegram", "https://t.me/..."],
+        ["twitter", "X / Twitter", "https://x.com/..."],
+        ["threads", "Threads", "https://threads.net/@..."],
+        ["whatsapp", "WhatsApp number or link", "919876543210"],
+        ["email", "Email", "you@example.com"],
+        ["website", "Website", "https://..."],
+        ["spotify", "Spotify", "https://open.spotify.com/..."],
+        ["reddit", "Reddit", "https://reddit.com/u/..."],
+        ["other", "Other link", "Any extra direct URL"]
+      ];
 
-      function cleanAttr(value) {
+      function text(value) {
+        return String(value ?? "");
+      }
+
+      function safeHTML(value) {
         return text(value)
           .replace(/&/g, "&amp;")
           .replace(/"/g, "&quot;")
@@ -670,171 +651,302 @@
           .replace(/>/g, "&gt;");
       }
 
-      function mediaBox(id, src, type) {
-        const box = $(id);
-        const url = text(src).trim();
+      function addProtocol(url) {
+        const value = text(url).trim();
 
-        if (!url) {
+        if (!value) return "";
+
+        if (/^https?:\/\//i.test(value)) {
+          return value;
+        }
+
+        return "https://" + value;
+      }
+
+      function previewImage(box, url, emptyMessage) {
+        if (!url.trim()) {
           box.className = "preview-empty";
-          box.textContent =
-            type === "music"
-              ? "Add an MP3 URL to test it here."
-              : "Add a " + type + " URL to preview it.";
+          box.textContent = emptyMessage;
           return;
         }
 
         box.className = "";
 
-        if (type === "music") {
-          box.innerHTML = `
-            <div class="audio-preview">
-              <audio controls src="${cleanAttr(url)}"></audio>
-            </div>
-          `;
-        } else {
-          box.innerHTML = `
-            <img
-              src="${cleanAttr(url)}"
-              alt="${type} preview"
-              referrerpolicy="no-referrer"
-            >
-          `;
-        }
+        box.innerHTML = `
+          <img
+            src="${safeHTML(addProtocol(url))}"
+            alt="Preview"
+            referrerpolicy="no-referrer"
+          >
+        `;
 
-        const element = box.querySelector("img, audio");
-
-        if (element) {
-          element.onerror = () => {
-            box.className = "preview-empty";
-            box.textContent =
-              "This URL could not be previewed. Check that it is a direct public " +
-              type +
-              " URL.";
-          };
-        }
+        box.querySelector("img").onerror = () => {
+          box.className = "preview-empty";
+          box.textContent =
+            "Image preview unavailable. Use a direct public image URL.";
+        };
       }
 
-      function updateMedia() {
-        mediaBox("avatarPreview", $("avatar").value, "profile image");
-        mediaBox("bannerPreview", $("banner").value, "banner image");
-        mediaBox("musicPreview", $("music").value, "music");
+      function updateMediaPreviews() {
+        previewImage(
+          $("avatarPreview"),
+          $("avatar").value,
+          "Add a profile image URL to preview it."
+        );
+
+        previewImage(
+          $("bannerPreview"),
+          $("banner").value,
+          "Add a banner image URL to preview it."
+        );
+
+        const musicBox = $("musicPreview");
+        const musicURL = $("music").value.trim();
+
+        if (!musicURL) {
+          musicBox.className = "preview-empty";
+          musicBox.textContent = "Add an MP3 URL to test it here.";
+          return;
+        }
+
+        musicBox.className = "";
+
+        musicBox.innerHTML = `
+          <div class="audio-preview">
+            <audio controls src="${safeHTML(addProtocol(musicURL))}"></audio>
+          </div>
+        `;
       }
 
       ["avatar", "banner", "music"].forEach(id => {
-        $(id).addEventListener("input", updateMedia);
+        $(id).addEventListener("input", updateMediaPreviews);
       });
 
-      function workCard(work = {}, index = 0) {
+      function normaliseWorkImages(work) {
+        const images = [];
+
+        if (Array.isArray(work.images)) {
+          work.images.forEach(image => {
+            if (typeof image === "string" && image.trim()) {
+              images.push(image.trim());
+            }
+          });
+        }
+
+        if (work.image && typeof work.image === "string") {
+          const oldImage = work.image.trim();
+
+          if (oldImage && !images.includes(oldImage)) {
+            images.unshift(oldImage);
+          }
+        }
+
+        return images;
+      }
+
+      function imageInput(imageURL = "", imageIndex = 0) {
+        return `
+          <div class="image-row">
+            <div>
+              <label class="label">
+                Photo ${imageIndex + 1} direct URL
+              </label>
+
+              <input
+                class="input work-image-url"
+                value="${safeHTML(imageURL)}"
+                placeholder="https://example.com/project-photo.jpg"
+              >
+            </div>
+
+            <button
+              class="remove remove-image"
+              type="button"
+            >
+              Remove photo
+            </button>
+          </div>
+
+          <div class="image-preview image-preview-box">
+            <img
+              src="${safeHTML(addProtocol(imageURL))}"
+              alt="Work image preview"
+              referrerpolicy="no-referrer"
+            >
+          </div>
+        `;
+      }
+
+      function workCard(work = {}, workIndex = 0) {
+        const images = normaliseWorkImages(work);
+
         return `
           <div class="work">
             <div class="work-head">
-              <b>Work card ${index + 1}</b>
+              <b>Work card ${workIndex + 1}</b>
 
-              <button class="remove remove-work" type="button">
-                Remove
+              <button
+                class="remove remove-work"
+                type="button"
+              >
+                Remove Work card
               </button>
             </div>
 
             <label class="label">Project title</label>
             <input
-              class="input wt"
-              value="${cleanAttr(work.title)}"
+              class="input work-title"
+              value="${safeHTML(work.title)}"
               placeholder="My project"
             >
 
-            <label class="label">Image direct URL</label>
-            <input
-              class="input wi"
-              value="${cleanAttr(work.image)}"
-              placeholder="https://..."
-            >
-
-            <label class="label">Caption</label>
+            <label class="label">Caption / description</label>
             <textarea
-              class="text wc"
-              placeholder="Short project description"
-            >${text(work.caption).replace(/</g, "&lt;")}</textarea>
+              class="text work-caption"
+              placeholder="Write a short project description"
+            >${safeHTML(work.caption)}</textarea>
 
             <label class="label">Direct project link</label>
             <input
-              class="input wl"
-              value="${cleanAttr(work.link)}"
+              class="input work-link"
+              value="${safeHTML(work.link)}"
               placeholder="https://..."
             >
 
-            <div class="preview" style="margin-top:12px">
-              <div class="preview-title">WORK IMAGE PREVIEW</div>
+            <label class="label">Project photo gallery</label>
 
-              <div class="workPreview preview-empty">
-                Add an image URL to preview it.
-              </div>
+            <p class="hint">
+              Add two or more photos to create an automatic fading image gallery.
+            </p>
+
+            <div class="work-images">
+              ${images.map(imageInput).join("")}
             </div>
+
+            <button
+              class="btn secondary add-image"
+              type="button"
+            >
+              + Add another photo
+            </button>
           </div>
         `;
       }
 
-      function drawWorks() {
-        const box = $("workList");
+      function updateImagePreview(row) {
+        const input = row.querySelector(".work-image-url");
+        const preview = row.nextElementSibling;
+        const url = input.value.trim();
 
-        box.innerHTML = works
+        if (!url) {
+          preview.innerHTML = "";
+          preview.style.display = "none";
+          return;
+        }
+
+        preview.style.display = "block";
+
+        preview.innerHTML = `
+          <img
+            src="${safeHTML(addProtocol(url))}"
+            alt="Work image preview"
+            referrerpolicy="no-referrer"
+          >
+        `;
+
+        preview.querySelector("img").onerror = () => {
+          preview.innerHTML = `
+            <div class="preview-empty">
+              Image preview unavailable. Check the direct image URL.
+            </div>
+          `;
+        };
+      }
+
+      function drawWorks() {
+        const container = $("workList");
+
+        container.innerHTML = works
           .map(workCard)
           .join("");
 
-        [...box.querySelectorAll(".work")].forEach((card, index) => {
-          const imageInput = card.querySelector(".wi");
-          const preview = card.querySelector(".workPreview");
+        [...container.querySelectorAll(".work")].forEach((card, workIndex) => {
+          const imageRows = [...card.querySelectorAll(".image-row")];
 
-          function updateWorkPreview() {
-            const url = imageInput.value.trim();
+          imageRows.forEach(row => {
+            const imageInputBox = row.querySelector(".work-image-url");
 
-            if (!url) {
-              preview.className = "workPreview preview-empty";
-              preview.textContent = "Add an image URL to preview it.";
-              return;
-            }
+            updateImagePreview(row);
 
-            preview.className = "workPreview";
+            imageInputBox.addEventListener("input", () => {
+              updateImagePreview(row);
+            });
 
-            preview.innerHTML = `
-              <img
-                src="${cleanAttr(url)}"
-                alt="Work preview"
-                referrerpolicy="no-referrer"
-              >
-            `;
+            row.querySelector(".remove-image").onclick = () => {
+              const preview = row.nextElementSibling;
 
-            preview.querySelector("img").onerror = () => {
-              preview.className = "workPreview preview-empty";
-              preview.textContent =
-                "Image preview unavailable. Check the direct URL.";
+              row.remove();
+
+              if (preview && preview.classList.contains("image-preview-box")) {
+                preview.remove();
+              }
             };
-          }
+          });
 
-          imageInput.addEventListener("input", updateWorkPreview);
+          card.querySelector(".add-image").onclick = () => {
+            const imageContainer = card.querySelector(".work-images");
+            const index = imageContainer.querySelectorAll(".image-row").length;
 
-          updateWorkPreview();
+            imageContainer.insertAdjacentHTML(
+              "beforeend",
+              imageInput("", index)
+            );
+
+            const newRow = imageContainer.lastElementChild.previousElementSibling;
+            const input = newRow.querySelector(".work-image-url");
+
+            input.addEventListener("input", () => {
+              updateImagePreview(newRow);
+            });
+
+            newRow.querySelector(".remove-image").onclick = () => {
+              const preview = newRow.nextElementSibling;
+
+              newRow.remove();
+
+              if (preview && preview.classList.contains("image-preview-box")) {
+                preview.remove();
+              }
+            };
+          };
 
           card.querySelector(".remove-work").onclick = () => {
-            works.splice(index, 1);
+            works.splice(workIndex, 1);
             drawWorks();
           };
         });
       }
 
       $("addWork").onclick = () => {
-        works.push({});
+        works.push({
+          title: "",
+          caption: "",
+          link: "",
+          images: []
+        });
+
         drawWorks();
       };
 
-      function customCard(item = {}) {
+      function customLinkRow(item = {}) {
         return `
-          <div class="row">
+          <div class="custom-row">
             <div>
               <label class="label">Link label</label>
 
               <input
-                class="input clabel"
-                value="${cleanAttr(item.label)}"
+                class="input custom-label"
+                value="${safeHTML(item.label)}"
                 placeholder="My blog"
               >
             </div>
@@ -843,41 +955,76 @@
               <label class="label">Direct URL</label>
 
               <input
-                class="input curl"
-                value="${cleanAttr(item.url)}"
+                class="input custom-url"
+                value="${safeHTML(item.url)}"
                 placeholder="https://..."
               >
             </div>
 
-            <button class="remove remove-custom" type="button">
+            <button
+              class="remove remove-custom"
+              type="button"
+            >
               Remove
             </button>
           </div>
         `;
       }
 
-      function drawCustom() {
-        const box = $("customList");
+      function drawCustomLinks() {
+        const container = $("customList");
 
-        box.innerHTML = customLinks
-          .map(customCard)
+        container.innerHTML = customLinks
+          .map(customLinkRow)
           .join("");
 
-        box.querySelectorAll(".remove-custom").forEach((button, index) => {
+        container.querySelectorAll(".remove-custom").forEach((button, index) => {
           button.onclick = () => {
             customLinks.splice(index, 1);
-            drawCustom();
+            drawCustomLinks();
           };
         });
       }
 
       $("addCustom").onclick = () => {
-        customLinks.push({});
-        drawCustom();
+        customLinks.push({
+          label: "",
+          url: ""
+        });
+
+        drawCustomLinks();
       };
 
+      function drawSocialFields() {
+        const groups = [[], [], []];
+
+        socialFields.forEach((item, index) => {
+          groups[index % 3].push(item);
+        });
+
+        $("socialList").innerHTML = groups.map(group => {
+          return `
+            <div>
+              ${group.map(([id, label, placeholder]) => `
+                <label class="label">${label}</label>
+
+                <input
+                  id="${id}"
+                  class="input"
+                  placeholder="${placeholder}"
+                >
+              `).join("")}
+            </div>
+          `;
+        }).join("");
+      }
+
       function set(id, value) {
-        $(id).value = text(value);
+        const element = $(id);
+
+        if (element) {
+          element.value = text(value);
+        }
       }
 
       function loadProfile() {
@@ -894,39 +1041,25 @@
           set("mood", profile.mood);
           set("emoji", profile.moodEmoji);
           set("location", profile.location);
+
           set("avatar", profile.avatar);
           set("banner", profile.banner);
           set("music", profile.music);
+
           set("theme", profile.theme || "classic");
+
+          set("profileFont", profile.profileFont || "Poppins");
+          set("titleFont", profile.titleFont || "Cormorant Garamond");
+
           set("skills", profile.skills);
           set("bio", profile.bio);
           set("profileText", profile.profileText);
           set("workTitle", profile.workTitle);
           set("workText", profile.workText);
 
-          [
-            "pinterest",
-            "instagram",
-            "facebook",
-            "linkedin",
-            "snapchat",
-            "tiktok",
-            "github",
-            "youtube",
-            "discord",
-            "telegram",
-            "twitter",
-            "threads",
-            "whatsapp",
-            "website",
-            "spotify",
-            "reddit",
-            "other"
-          ].forEach(id => {
+          socialFields.forEach(([id]) => {
             set(id, social[id]);
           });
-
-          set("mail", social.email);
 
           works = Array.isArray(profile.works)
             ? profile.works
@@ -937,8 +1070,8 @@
             : [];
 
           drawWorks();
-          drawCustom();
-          updateMedia();
+          drawCustomLinks();
+          updateMediaPreviews();
         });
       }
 
@@ -960,11 +1093,11 @@
 
       $("loginBtn").onclick = login;
 
-      $("pass").onkeydown = event => {
+      $("pass").addEventListener("keydown", event => {
         if (event.key === "Enter") {
           login();
         }
-      };
+      });
 
       $("logout").onclick = () => {
         firebase.auth().signOut();
@@ -974,6 +1107,8 @@
         if (user) {
           $("login").classList.add("hide");
           $("app").classList.remove("hide");
+
+          drawSocialFields();
           loadProfile();
         } else {
           $("app").classList.add("hide");
@@ -983,55 +1118,49 @@
       });
 
       $("save").onclick = async () => {
-        const button = $("save");
+        const saveButton = $("save");
 
-        const workNodes = [...document.querySelectorAll(".work")];
-
-        const newWorks = workNodes
+        const savedWorks = [...document.querySelectorAll(".work")]
           .map(card => {
+            const title = card.querySelector(".work-title").value.trim();
+
+            const images = [
+              ...card.querySelectorAll(".work-image-url")
+            ]
+              .map(input => input.value.trim())
+              .filter(Boolean);
+
             return {
-              title: card.querySelector(".wt").value.trim(),
-              image: card.querySelector(".wi").value.trim(),
-              caption: card.querySelector(".wc").value.trim(),
-              link: card.querySelector(".wl").value.trim()
+              title: title,
+              caption: card.querySelector(".work-caption").value.trim(),
+              link: card.querySelector(".work-link").value.trim(),
+
+              /*
+                image keeps compatibility with old Work cards.
+                images stores all gallery photos.
+              */
+              image: images[0] || "",
+              images: images
             };
           })
           .filter(work => work.title);
 
-        const custom = [...document.querySelectorAll("#customList .row")]
+        const savedCustomLinks = [
+          ...document.querySelectorAll(".custom-row")
+        ]
           .map(row => {
             return {
-              label: row.querySelector(".clabel").value.trim(),
-              url: row.querySelector(".curl").value.trim()
+              label: row.querySelector(".custom-label").value.trim(),
+              url: row.querySelector(".custom-url").value.trim()
             };
           })
           .filter(item => item.label && item.url);
 
-        const social = {};
+        const socials = {};
 
-        [
-          "pinterest",
-          "instagram",
-          "facebook",
-          "linkedin",
-          "snapchat",
-          "tiktok",
-          "github",
-          "youtube",
-          "discord",
-          "telegram",
-          "twitter",
-          "threads",
-          "whatsapp",
-          "website",
-          "spotify",
-          "reddit",
-          "other"
-        ].forEach(id => {
-          social[id] = $(id).value.trim();
+        socialFields.forEach(([id]) => {
+          socials[id] = $(id).value.trim();
         });
-
-        social.email = $("mail").value.trim();
 
         const profile = {
           name: $("name").value.trim() || "Arun4ever",
@@ -1050,6 +1179,9 @@
 
           theme: $("theme").value,
 
+          profileFont: $("profileFont").value,
+          titleFont: $("titleFont").value,
+
           skills: $("skills").value.trim(),
           bio: $("bio").value.trim(),
           profileText: $("profileText").value.trim(),
@@ -1057,14 +1189,14 @@
           workTitle: $("workTitle").value.trim(),
           workText: $("workText").value.trim(),
 
-          works: newWorks,
-          socials: social,
-          customLinks: custom
+          works: savedWorks,
+          socials: socials,
+          customLinks: savedCustomLinks
         };
 
         try {
-          button.disabled = true;
-          button.textContent = "Saving…";
+          saveButton.disabled = true;
+          saveButton.textContent = "Saving…";
 
           await firebase
             .database()
@@ -1081,14 +1213,14 @@
           alert("Save failed: " + error.message);
 
         } finally {
-          button.disabled = false;
-          button.textContent = "Save all changes";
+          saveButton.disabled = false;
+          saveButton.textContent = "Save all changes";
         }
       };
 
       if (!window.firebase || !firebase.apps.length) {
         $("err").textContent =
-          "Firebase config is not connected. Check firebase-config.js.";
+          "Firebase is not connected. Check firebase-config.js.";
       }
     })();
   </script>
