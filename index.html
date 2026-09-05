@@ -2,20 +2,32 @@
 <html lang="en">
 <head>
 
+  <meta name="p:domain_verify" content="c4bc0e531a41b1e5abb998e8ca500b83">
 
-  <meta name="p:domain_verify" content="c4bc0e531a41b1e5abb998e8ca500b83"/>
-  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>Arun4ever | Profile</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
 
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
     :root{
       --paper:#f7f5f0;
@@ -25,12 +37,15 @@
       --accent:#b18a4e;
       --card:#fffdf9;
       --shadow:rgba(46,35,21,.10);
+
+      --body-font:Poppins,sans-serif;
+      --title-font:"Cormorant Garamond",serif;
     }
 
     body{
       background:var(--paper);
       color:var(--ink);
-      font-family:Poppins,sans-serif;
+      font-family:var(--body-font);
     }
 
     body.theme-default{
@@ -43,7 +58,9 @@
       --shadow:rgba(0,0,0,.25);
     }
 
-    .hide{display:none!important}
+    .hide{
+      display:none !important;
+    }
 
     .loader{
       position:fixed;
@@ -77,7 +94,10 @@
     }
 
     @keyframes pulse{
-      to{transform:scale(1.8);opacity:.3}
+      to{
+        transform:scale(1.8);
+        opacity:.3;
+      }
     }
 
     .page{
@@ -91,51 +111,73 @@
     }
 
     .panel{
+      overflow:visible;
       border:1px solid var(--line);
-      border-radius:10px;
+      border-radius:12px;
       background:var(--card);
       box-shadow:0 14px 35px var(--shadow);
-      overflow:visible;
     }
 
     .banner{
+      position:relative;
+      height:175px;
       overflow:hidden;
-      border-radius:9px 9px 0 0;
-      line-height:0;
-      background:#392a35;
+      border-radius:11px 11px 0 0;
+      background:linear-gradient(120deg,#23162b,#684633 48%,#153c40);
+    }
+
+    .banner::after{
+      position:absolute;
+      inset:0;
+      content:"";
+      background:linear-gradient(
+        180deg,
+        transparent 45%,
+        rgba(0,0,0,.22)
+      );
+      pointer-events:none;
     }
 
     .banner-img{
       display:block;
       width:100%;
-      height:auto;
-      max-width:100%;
-      object-fit:contain;
+      height:100%;
+      object-fit:cover;
     }
 
     .fallback{
-      height:130px;
+      width:100%;
+      height:100%;
       background:linear-gradient(120deg,#23162b,#684633 48%,#153c40);
     }
 
     .head{
+      position:relative;
       display:flex;
       align-items:flex-end;
-      gap:12px;
-      min-height:130px;
-      padding:0 16px 15px;
+      gap:14px;
+      min-height:145px;
+      padding:0 18px 17px;
     }
 
     .avatar{
-      width:118px;
-      height:118px;
+      position:relative;
+      z-index:2;
+      width:124px;
+      height:124px;
       flex:none;
-      margin-top:-59px;
+      margin-top:-62px;
       overflow:hidden;
-      border:4px solid #fff;
+      border:5px solid var(--card);
       border-radius:50%;
       background:#37244d;
       box-shadow:0 13px 27px rgba(0,0,0,.26);
+      transition:transform .3s ease,box-shadow .3s ease;
+    }
+
+    .avatar:hover{
+      transform:translateY(-4px) rotate(-1deg);
+      box-shadow:0 18px 34px rgba(0,0,0,.3);
     }
 
     .avatar img{
@@ -159,17 +201,21 @@
       height:100%;
       place-items:center;
       color:#fff7ec;
-      font:700 60px "Cormorant Garamond",serif;
+      font:700 62px var(--title-font);
     }
 
-    .identity{min-width:0}
+    .identity{
+      min-width:0;
+      padding-bottom:2px;
+    }
 
     .name{
-      font:700 35px/.9 "Cormorant Garamond",serif;
+      font:700 38px/.9 var(--title-font);
+      overflow-wrap:anywhere;
     }
 
     .tagline{
-      margin-top:7px;
+      margin-top:8px;
       color:var(--muted);
       font-size:10px;
     }
@@ -178,7 +224,7 @@
       display:flex;
       gap:5px;
       flex-wrap:wrap;
-      margin-top:8px;
+      margin-top:9px;
     }
 
     .pill{
@@ -191,8 +237,8 @@
     }
 
     .content{
-      min-height:500px;
-      padding:23px 17px;
+      min-height:450px;
+      padding:23px 18px;
       border-top:1px solid var(--line);
     }
 
@@ -206,7 +252,7 @@
     }
 
     .bio{
-      font:600 23px/1.35 "Cormorant Garamond",serif;
+      font:600 25px/1.35 var(--title-font);
       white-space:pre-line;
     }
 
@@ -240,7 +286,7 @@
     }
 
     .right-title{
-      font:700 35px/1 "Cormorant Garamond",serif;
+      font:700 38px/1 var(--title-font);
     }
 
     .right-sub{
@@ -262,19 +308,118 @@
       position:relative;
       overflow:hidden;
       border:1px solid var(--line);
-      border-radius:9px;
+      border-radius:10px;
       background:var(--card);
-      transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
     }
 
-    .work-img{
-      display:block;
+    .work:hover{
+      transform:translateY(-6px);
+      border-color:var(--accent);
+      box-shadow:0 16px 30px var(--shadow);
+    }
+
+    .work:active{
+      transform:translateY(-1px) scale(.985);
+      box-shadow:0 6px 14px var(--shadow);
+    }
+
+    .work-gallery{
+      position:relative;
       width:100%;
-      height:auto;
-      max-width:100%;
+      aspect-ratio:16/10;
+      overflow:hidden;
+      background:#17151a;
+    }
+
+    .work-slide{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
       object-fit:contain;
-      background:transparent;
-      transition:transform .35s ease,filter .35s ease;
+      opacity:0;
+      transform:scale(1.02);
+      transition:opacity .8s ease,transform 2.4s ease;
+    }
+
+    .work-slide.active{
+      opacity:1;
+      transform:scale(1);
+    }
+
+    .work:hover .work-slide.active{
+      transform:scale(1.035);
+    }
+
+    .gallery-count{
+      position:absolute;
+      z-index:3;
+      top:9px;
+      right:9px;
+      display:flex;
+      align-items:center;
+      gap:5px;
+      padding:5px 7px;
+      border-radius:999px;
+      background:rgba(0,0,0,.58);
+      color:#fff;
+      font-size:8px;
+      backdrop-filter:blur(6px);
+    }
+
+    .gallery-dots{
+      position:absolute;
+      z-index:3;
+      right:10px;
+      bottom:9px;
+      left:10px;
+      display:flex;
+      justify-content:center;
+      gap:5px;
+    }
+
+    .gallery-dot{
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:rgba(255,255,255,.45);
+      transition:transform .25s ease,background .25s ease;
+    }
+
+    .gallery-dot.active{
+      transform:scale(1.5);
+      background:#fff;
+    }
+
+    .gallery-next{
+      position:absolute;
+      z-index:4;
+      top:50%;
+      right:8px;
+      display:grid;
+      width:28px;
+      height:28px;
+      place-items:center;
+      border:0;
+      border-radius:50%;
+      background:rgba(0,0,0,.52);
+      color:#fff;
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(-50%);
+      transition:opacity .25s ease,transform .25s ease;
+    }
+
+    .work:hover .gallery-next{
+      opacity:1;
+    }
+
+    .gallery-next:hover{
+      transform:translateY(-50%) scale(1.08);
     }
 
     .work-body{
@@ -282,7 +427,7 @@
     }
 
     .work-title{
-      font:700 21px/1 "Cormorant Garamond",serif;
+      font:700 22px/1 var(--title-font);
     }
 
     .work-caption{
@@ -308,28 +453,8 @@
       transition:transform .25s ease;
     }
 
-    .work:hover{
-      transform:translateY(-6px);
-      border-color:var(--accent);
-      box-shadow:0 16px 30px var(--shadow);
-    }
-
-    .work:hover .work-img{
-      filter:brightness(1.04);
-    }
-
     .work:hover .work-link i{
       transform:translate(2px,-2px);
-    }
-
-    .work:active{
-      transform:translateY(-1px) scale(.985);
-      box-shadow:0 6px 14px var(--shadow);
-    }
-
-    .work:active .work-img{
-      transform:scale(.985);
-      filter:brightness(.96);
     }
 
     .empty{
@@ -376,7 +501,7 @@
 
     .music{
       position:fixed;
-      z-index:5;
+      z-index:8;
       right:18px;
       bottom:18px;
       width:44px;
@@ -395,7 +520,9 @@
     }
 
     @keyframes spin{
-      to{transform:rotate(360deg)}
+      to{
+        transform:rotate(360deg);
+      }
     }
 
     @media(max-width:760px){
@@ -412,16 +539,33 @@
     }
 
     @media(max-width:390px){
-      .page{padding:0 9px}
-      .avatar{
-        width:101px;
-        height:101px;
-        margin-top:-51px;
+      .page{
+        padding:0 9px;
       }
 
-      .head{min-height:137px}
-      .name{font-size:30px}
-      .bio{font-size:21px}
+      .banner{
+        height:150px;
+      }
+
+      .avatar{
+        width:105px;
+        height:105px;
+        margin-top:-53px;
+      }
+
+      .head{
+        min-height:135px;
+        padding-right:13px;
+        padding-left:13px;
+      }
+
+      .name{
+        font-size:31px;
+      }
+
+      .bio{
+        font-size:22px;
+      }
     }
   </style>
 </head>
@@ -446,12 +590,17 @@
       <div class="head">
 
         <div id="avatar" class="avatar">
-          <img id="avatarImg" alt="Profile picture" referrerpolicy="no-referrer">
+          <img
+            id="avatarImg"
+            alt="Profile picture"
+            referrerpolicy="no-referrer"
+          >
           <div id="letter" class="letter">A</div>
         </div>
 
         <div class="identity">
           <h1 id="name" class="name">Loading…</h1>
+
           <p id="tagline" class="tagline"></p>
 
           <div class="meta">
@@ -464,6 +613,7 @@
 
       <div class="content">
         <div class="label">About me</div>
+
         <p id="bio" class="bio"></p>
 
         <div class="bar"></div>
@@ -478,6 +628,7 @@
     <section class="right">
 
       <h2 id="workTitle" class="right-title">My work</h2>
+
       <p id="workText" class="right-sub"></p>
 
       <div id="works" class="works"></div>
@@ -496,7 +647,12 @@
 
   </main>
 
-  <button id="music" class="music hide" type="button" aria-label="Play music">
+  <button
+    id="music"
+    class="music hide"
+    type="button"
+    aria-label="Play music"
+  >
     ♪
   </button>
 
@@ -504,6 +660,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
   <script src="firebase-config.js"></script>
 
   <script>
@@ -518,6 +675,8 @@
         workTitle: "Selected work",
         workText: "A few ideas and projects I have created.",
         theme: "classic",
+        profileFont: "Poppins",
+        titleFont: "Cormorant Garamond",
         mood: "Creative",
         moodEmoji: "😎",
         location: "Ahmedabad, India 🇮🇳",
@@ -528,6 +687,15 @@
         works: [],
         socials: {},
         customLinks: []
+      };
+
+      const fontOptions = {
+        "Poppins": "Poppins,sans-serif",
+        "Inter": "Inter,sans-serif",
+        "DM Sans": "\"DM Sans\",sans-serif",
+        "Space Grotesk": "\"Space Grotesk\",sans-serif",
+        "Playfair Display": "\"Playfair Display\",serif",
+        "Cormorant Garamond": "\"Cormorant Garamond\",serif"
       };
 
       const icons = {
@@ -552,13 +720,13 @@
       };
 
       function escapeHTML(value) {
-        return String(value ?? "").replace(/[&<>"]/g, char => {
+        return String(value ?? "").replace(/[&<>"]/g, character => {
           return {
             "&": "&amp;",
             "<": "&lt;",
             ">": "&gt;",
             '"': "&quot;"
-          }[char];
+          }[character];
         });
       }
 
@@ -601,10 +769,6 @@
           return;
         }
 
-        /*
-          Show the image container immediately.
-          If the URL is invalid, onerror returns to the letter avatar.
-        */
         avatar.classList.add("has-img");
 
         image.onerror = () => {
@@ -640,8 +804,188 @@
         image.src = safeURL(url);
       }
 
+      function workImages(work) {
+        const images = [];
+
+        if (Array.isArray(work.images)) {
+          work.images.forEach(image => {
+            if (typeof image === "string" && image.trim()) {
+              images.push(image.trim());
+            }
+          });
+        }
+
+        if (work.image && typeof work.image === "string") {
+          if (!images.includes(work.image.trim())) {
+            images.unshift(work.image.trim());
+          }
+        }
+
+        return images;
+      }
+
+      function createWorkCard(work, workNumber) {
+        const images = workImages(work);
+
+        const slides = images
+          .map((image, imageIndex) => {
+            return `
+              <img
+                class="work-slide ${imageIndex === 0 ? "active" : ""}"
+                src="${escapeHTML(safeURL(image))}"
+                alt="${escapeHTML(work.title)} image ${imageIndex + 1}"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+              >
+            `;
+          })
+          .join("");
+
+        const dots = images.length > 1
+          ? `
+            <div class="gallery-dots">
+              ${images.map((_, index) => `
+                <span class="gallery-dot ${index === 0 ? "active" : ""}"></span>
+              `).join("")}
+            </div>
+          `
+          : "";
+
+        const counter = images.length > 1
+          ? `
+            <span class="gallery-count">
+              <i class="fa-regular fa-images"></i>
+              <span class="galleryCurrent">1</span>/${images.length}
+            </span>
+          `
+          : "";
+
+        const nextButton = images.length > 1
+          ? `
+            <button
+              class="gallery-next"
+              type="button"
+              aria-label="Show next image"
+            >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          `
+          : "";
+
+        const gallery = images.length
+          ? `
+            <div class="work-gallery" data-work="${workNumber}">
+              ${slides}
+              ${counter}
+              ${dots}
+              ${nextButton}
+            </div>
+          `
+          : "";
+
+        const link = work.link
+          ? `
+            <a
+              class="work-link"
+              href="${escapeHTML(safeURL(work.link))}"
+              target="_blank"
+              rel="noopener"
+            >
+              View project
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          `
+          : "";
+
+        return `
+          <article class="work">
+            ${gallery}
+
+            <div class="work-body">
+              <h3 class="work-title">${escapeHTML(work.title)}</h3>
+
+              <p class="work-caption">
+                ${escapeHTML(work.caption || "")}
+              </p>
+
+              ${link}
+            </div>
+          </article>
+        `;
+      }
+
+      function startGalleryAnimations() {
+        document.querySelectorAll(".work-gallery").forEach(gallery => {
+          const slides = [...gallery.querySelectorAll(".work-slide")];
+          const dots = [...gallery.querySelectorAll(".gallery-dot")];
+          const currentNumber = gallery.querySelector(".galleryCurrent");
+          const nextButton = gallery.querySelector(".gallery-next");
+
+          if (slides.length < 2) return;
+
+          let activeIndex = 0;
+          let timer;
+
+          function showSlide(index) {
+            activeIndex = index;
+
+            slides.forEach((slide, slideIndex) => {
+              slide.classList.toggle("active", slideIndex === activeIndex);
+            });
+
+            dots.forEach((dot, dotIndex) => {
+              dot.classList.toggle("active", dotIndex === activeIndex);
+            });
+
+            if (currentNumber) {
+              currentNumber.textContent = activeIndex + 1;
+            }
+          }
+
+          function nextSlide() {
+            showSlide((activeIndex + 1) % slides.length);
+          }
+
+          function startTimer() {
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+              nextSlide();
+            }, 3500);
+          }
+
+          function stopTimer() {
+            clearInterval(timer);
+          }
+
+          if (nextButton) {
+            nextButton.addEventListener("click", event => {
+              event.preventDefault();
+              event.stopPropagation();
+
+              nextSlide();
+              startTimer();
+            });
+          }
+
+          gallery.addEventListener("mouseenter", stopTimer);
+          gallery.addEventListener("mouseleave", startTimer);
+
+          gallery.addEventListener("touchstart", stopTimer, {
+            passive: true
+          });
+
+          gallery.addEventListener("touchend", startTimer, {
+            passive: true
+          });
+
+          startTimer();
+        });
+      }
+
       function render(profileData) {
         const profile = Object.assign({}, defaults, profileData || {});
+
         const socials = Object.assign(
           {},
           defaults.socials,
@@ -651,6 +995,24 @@
         document.body.className =
           "theme-" + (profile.theme === "default" ? "default" : "classic");
 
+        const bodyFont =
+          fontOptions[profile.profileFont] ||
+          fontOptions[defaults.profileFont];
+
+        const titleFont =
+          fontOptions[profile.titleFont] ||
+          fontOptions[defaults.titleFont];
+
+        document.documentElement.style.setProperty(
+          "--body-font",
+          bodyFont
+        );
+
+        document.documentElement.style.setProperty(
+          "--title-font",
+          titleFont
+        );
+
         $("name").textContent = profile.name || defaults.name;
 
         $("tagline").textContent =
@@ -659,7 +1021,10 @@
           defaults.tagline;
 
         $("letter").textContent =
-          (profile.name || defaults.name).trim().charAt(0).toUpperCase() || "A";
+          (profile.name || defaults.name)
+            .trim()
+            .charAt(0)
+            .toUpperCase() || "A";
 
         $("mood").textContent =
           ((profile.moodEmoji || "") + " " + (profile.mood || "")).trim();
@@ -679,48 +1044,29 @@
           .split(",")
           .map(skill => skill.trim())
           .filter(Boolean)
-          .map(skill => `<span class="skill">${escapeHTML(skill)}</span>`)
+          .map(skill => {
+            return `<span class="skill">${escapeHTML(skill)}</span>`;
+          })
           .join("");
 
-        const works = Array.isArray(profile.works) ? profile.works : [];
+        const works = Array.isArray(profile.works)
+          ? profile.works
+          : [];
 
         const workCards = works
           .filter(work => work && work.title)
-          .map(work => {
-            const image = work.image
-              ? `<img class="work-img" loading="lazy" referrerpolicy="no-referrer"
-                   src="${escapeHTML(safeURL(work.image))}"
-                   alt="${escapeHTML(work.title)}">`
-              : "";
-
-            const link = work.link
-              ? `<a class="work-link"
-                   href="${escapeHTML(safeURL(work.link))}"
-                   target="_blank"
-                   rel="noopener">
-                   View project
-                   <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                 </a>`
-              : "";
-
-            return `
-              <article class="work">
-                ${image}
-                <div class="work-body">
-                  <h3 class="work-title">${escapeHTML(work.title)}</h3>
-                  <p class="work-caption">${escapeHTML(work.caption || "")}</p>
-                  ${link}
-                </div>
-              </article>
-            `;
-          })
+          .map((work, index) => createWorkCard(work, index))
           .join("");
 
         $("works").innerHTML =
           workCards ||
-          `<div class="empty">
-            Work cards will appear here after they are added from the admin panel.
-          </div>`;
+          `
+            <div class="empty">
+              Work cards will appear here after they are added from the admin panel.
+            </div>
+          `;
+
+        startGalleryAnimations();
 
         let socialHTML = "";
 
@@ -730,10 +1076,12 @@
           if (!value) return;
 
           socialHTML += `
-            <a class="social"
-               href="${escapeHTML(socialURL(platform, value))}"
-               target="_blank"
-               rel="noopener">
+            <a
+              class="social"
+              href="${escapeHTML(socialURL(platform, value))}"
+              target="_blank"
+              rel="noopener"
+            >
               <i class="${details[0]}"></i>
               ${details[1]}
             </a>
@@ -749,15 +1097,19 @@
 
         const customHTML = customLinks
           .filter(item => item && item.label && item.url)
-          .map(item => `
-            <a class="social"
-               href="${escapeHTML(safeURL(item.url))}"
-               target="_blank"
-               rel="noopener">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              ${escapeHTML(item.label)}
-            </a>
-          `)
+          .map(item => {
+            return `
+              <a
+                class="social"
+                href="${escapeHTML(safeURL(item.url))}"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                ${escapeHTML(item.label)}
+              </a>
+            `;
+          })
           .join("");
 
         $("customLinks").innerHTML = customHTML;
