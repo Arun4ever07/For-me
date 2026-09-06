@@ -30,7 +30,1154 @@
       --line:#dedad1;
       --muted:#77736c;
       --accent:#b18a4e;
+      --card:#fffdf9;<!doctype html>
+<html lang="en">
+<head>
+  <meta name="p:domain_verify" content="c4bc0e531a41b1e5abb998e8ca500b83">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Arun4ever | Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --paper:#f7f5f0;
+      --ink:#171513;
+      --line:#dedad1;
+      --muted:#77736c;
+      --accent:#b18a4e;
       --card:#fffdf9;
+      --shadow:rgba(46,35,21,.12);
+      --body-font:Poppins,sans-serif;
+      --title-font:"Cormorant Garamond",serif;
+    }
+
+    body{
+      background:var(--paper);
+      color:var(--ink);
+      font-family:var(--body-font);
+    }
+
+    body.theme-default{
+      --paper:#101116;
+      --ink:#f3f1e9;
+      --line:#30313a;
+      --muted:#aaa9b1;
+      --accent:#8297ff;
+      --card:#191a20;
+      --shadow:rgba(0,0,0,.28);
+    }
+
+    .hide{display:none!important}
+
+    .loader{
+      position:fixed;
+      z-index:100;
+      inset:0;
+      display:grid;
+      place-items:center;
+      background:var(--paper);
+      transition:opacity .35s ease;
+    }
+
+    .loader.done{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .loader-text{
+      color:var(--muted);
+      font-size:11px;
+      letter-spacing:1px;
+    }
+
+    .dot{
+      display:inline-block;
+      width:6px;
+      height:6px;
+      margin-left:6px;
+      border-radius:50%;
+      background:var(--accent);
+      animation:pulse .9s infinite alternate;
+    }
+
+    @keyframes pulse{
+      to{transform:scale(1.8);opacity:.3}
+    }
+
+    .page{
+      width:min(1200px,100%);
+      margin:36px auto;
+      padding:0 20px;
+      display:grid;
+      grid-template-columns:420px minmax(0,1fr);
+      gap:42px;
+      align-items:start;
+    }
+
+    .panel{
+      overflow:visible;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--card);
+      box-shadow:0 14px 35px var(--shadow);
+    }
+
+    .banner{
+      position:relative;
+      height:230px;
+      overflow:hidden;
+      border-radius:11px 11px 0 0;
+      background:linear-gradient(120deg,#23162b,#684633 48%,#153c40);
+    }
+
+    .banner::after{
+      position:absolute;
+      inset:0;
+      content:"";
+      background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.28));
+      pointer-events:none;
+    }
+
+    .banner-img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .fallback{
+      width:100%;
+      height:100%;
+      background:linear-gradient(120deg,#23162b,#684633 48%,#153c40);
+    }
+
+    /*
+      Avatar is 160px.
+      margin-top is -80px.
+      Exactly 80px remains inside the banner.
+      Exactly 80px remains below the banner.
+    */
+    .head{
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      min-height:178px;
+      padding:0 20px 20px;
+    }
+
+    .avatar{
+      position:relative;
+      z-index:5;
+      width:160px;
+      height:160px;
+      flex:none;
+      margin-top:-80px;
+      overflow:hidden;
+      border:6px solid var(--card);
+      border-radius:50%;
+      background:#37244d;
+      box-shadow:0 16px 34px rgba(0,0,0,.33);
+      transition:transform .3s ease,box-shadow .3s ease;
+    }
+
+    .avatar:hover{
+      transform:translateY(-5px) rotate(-1deg);
+      box-shadow:0 23px 42px rgba(0,0,0,.36);
+    }
+
+    .avatar img{
+      display:none;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .avatar.has-img img{display:block}
+    .avatar.has-img .letter{display:none}
+
+    .letter{
+      display:grid;
+      width:100%;
+      height:100%;
+      place-items:center;
+      color:#fff7ec;
+      font:700 74px var(--title-font);
+    }
+
+    .identity{
+      min-width:0;
+      padding-bottom:3px;
+    }
+
+    .name{
+      font:700 40px/.9 var(--title-font);
+      overflow-wrap:anywhere;
+    }
+
+    .tagline{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:5px;
+      margin-top:9px;
+    }
+
+    .pill{
+      padding:5px 8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:8px;
+      white-space:nowrap;
+    }
+
+    .content{
+      min-height:420px;
+      padding:24px 20px;
+      border-top:1px solid var(--line);
+    }
+
+    .label{
+      margin-bottom:9px;
+      color:var(--accent);
+      font-size:8px;
+      font-weight:700;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+    }
+
+    .bio{
+      color:var(--ink);
+      font-family:"Libre Baskerville",serif;
+      font-size:19px;
+      font-weight:400;
+      line-height:1.72;
+      white-space:pre-line;
+    }
+
+    .bar{
+      width:36px;
+      height:2px;
+      margin:17px 0;
+      background:var(--accent);
+    }
+
+    .detail{
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.75;
+      white-space:pre-line;
+    }
+
+    .skills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:18px;
+    }
+
+    .skill{
+      padding:5px 8px;
+      border:1px solid var(--line);
+      border-radius:4px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .right-title{
+      font:700 40px/1 var(--title-font);
+    }
+
+    .right-sub{
+      max-width:560px;
+      margin:9px 0 23px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.75;
+      white-space:pre-line;
+    }
+
+    .works{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .work{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:var(--card);
+      transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+    }
+
+    .work:hover{
+      transform:translateY(-6px);
+      border-color:var(--accent);
+      box-shadow:0 16px 30px var(--shadow);
+    }
+
+    .work:active{
+      transform:translateY(-1px) scale(.985);
+    }
+
+    /*
+      No fixed image height.
+      No forced aspect ratio.
+      Original photo proportions remain visible.
+    */
+    .work-gallery{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      background:#101116;
+      line-height:0;
+    }
+
+    .work-slide{
+      display:none;
+      width:100%;
+      height:auto;
+      max-width:100%;
+      object-fit:contain;
+      background:#101116;
+    }
+
+    .work-slide.active{
+      display:block;
+      animation:classicFade .7s ease;
+    }
+
+    @keyframes classicFade{
+      from{
+        opacity:0;
+        transform:scale(1.018);
+      }
+
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
+    }
+
+    .gallery-count{
+      position:absolute;
+      z-index:4;
+      top:9px;
+      right:9px;
+      padding:5px 7px;
+      border-radius:999px;
+      background:rgba(0,0,0,.60);
+      color:#fff;
+      font-size:8px;
+      line-height:1;
+    }
+
+    .gallery-dots{
+      position:absolute;
+      z-index:4;
+      right:10px;
+      bottom:9px;
+      left:10px;
+      display:flex;
+      justify-content:center;
+      gap:5px;
+    }
+
+    .gallery-dot{
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:rgba(255,255,255,.45);
+      transition:.25s ease;
+    }
+
+    .gallery-dot.active{
+      transform:scale(1.5);
+      background:#fff;
+    }
+
+    .gallery-next{
+      position:absolute;
+      z-index:5;
+      top:50%;
+      right:9px;
+      display:grid;
+      width:30px;
+      height:30px;
+      place-items:center;
+      border:0;
+      border-radius:50%;
+      background:rgba(0,0,0,.56);
+      color:#fff;
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(-50%);
+      transition:.25s ease;
+    }
+
+    .work:hover .gallery-next{
+      opacity:1;
+    }
+
+    .gallery-next:hover{
+      transform:translateY(-50%) scale(1.1);
+    }
+
+    .work-body{
+      padding:14px;
+    }
+
+    .work-title{
+      font:700 23px/1 var(--title-font);
+    }
+
+    .work-caption{
+      min-height:34px;
+      margin:7px 0 12px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.65;
+      white-space:pre-line;
+    }
+
+    .work-link{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:var(--accent);
+      font-size:10px;
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .work-link i{
+      transition:transform .25s ease;
+    }
+
+    .work:hover .work-link i{
+      transform:translate(2px,-2px);
+    }
+
+    .empty{
+      padding:38px 15px;
+      border:1px dashed var(--line);
+      border-radius:9px;
+      color:var(--muted);
+      font-size:11px;
+      text-align:center;
+    }
+
+    .social-title{margin-top:30px}
+    .custom-title{margin-top:22px}
+
+    .socials{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .social{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:6px;
+      color:var(--muted);
+      font-size:10px;
+      text-decoration:none;
+      transition:.2s ease;
+    }
+
+    .social:hover{
+      transform:translateY(-2px);
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+
+    .music{
+      position:fixed;
+      z-index:20;
+      right:18px;
+      bottom:18px;
+      width:46px;
+      height:46px;
+      border:0;
+      border-radius:50%;
+      background:#19171b;
+      color:#fff;
+      cursor:pointer;
+      font-size:17px;
+      box-shadow:0 8px 22px rgba(0,0,0,.25);
+    }
+
+    .music.playing{
+      animation:spin 3s linear infinite;
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+
+    @media(max-width:760px){
+      .page{
+        grid-template-columns:minmax(0,440px);
+        justify-content:center;
+        gap:28px;
+        padding:0 12px;
+      }
+
+      .works{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:430px){
+      .page{padding:0 9px}
+
+      .banner{
+        height:190px;
+      }
+
+      .avatar{
+        width:132px;
+        height:132px;
+        margin-top:-66px;
+        border-width:5px;
+      }
+
+      .head{
+        min-height:156px;
+        gap:12px;
+        padding:0 13px 16px;
+      }
+
+      .name{
+        font-size:31px;
+      }
+
+      .bio{
+        font-size:17px;
+        line-height:1.72;
+      }
+
+      .letter{
+        font-size:60px;
+      }
+    }
+  </style>
+</head>
+
+<body class="theme-classic">
+
+  <div id="loader" class="loader">
+    <div class="loader-text">
+      Loading profile<span class="dot"></span>
+    </div>
+  </div>
+
+  <main class="page">
+
+    <section class="panel">
+
+      <div class="banner">
+        <img id="bannerImg" class="banner-img hide" alt="Profile banner">
+        <div id="fallback" class="fallback"></div>
+      </div>
+
+      <div class="head">
+
+        <div id="avatar" class="avatar">
+          <img
+            id="avatarImg"
+            alt="Profile picture"
+            referrerpolicy="no-referrer"
+          >
+          <div id="letter" class="letter">A</div>
+        </div>
+
+        <div class="identity">
+          <h1 id="name" class="name">Loading…</h1>
+          <p id="tagline" class="tagline"></p>
+
+          <div class="meta">
+            <span id="mood" class="pill"></span>
+            <span id="location" class="pill"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="content">
+        <div class="label">About me</div>
+        <p id="bio" class="bio"></p>
+
+        <div class="bar"></div>
+
+        <p id="profileText" class="detail"></p>
+
+        <div id="skills" class="skills"></div>
+      </div>
+
+    </section>
+
+    <section class="right">
+
+      <h2 id="workTitle" class="right-title">My work</h2>
+      <p id="workText" class="right-sub"></p>
+
+      <div id="works" class="works"></div>
+
+      <div id="socialWrap" class="hide">
+        <div class="label social-title">Find me online</div>
+        <div id="socials" class="socials"></div>
+      </div>
+
+      <div id="customWrap" class="hide">
+        <div class="label custom-title">More links</div>
+        <div id="customLinks" class="socials"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <button id="music" class="music hide" type="button">
+    ♪
+  </button>
+
+  <audio id="audio" loop preload="none"></audio>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+
+      const defaults = {
+        name: "Arun4ever",
+        tagline: "Creative Web Developer",
+        bio: "Welcome to my corner of the internet.",
+        profileText: "A personal space for ideas, creative work, and everything I am building.",
+        workTitle: "Selected work",
+        workText: "A few ideas and projects I have created.",
+        theme: "classic",
+        profileFont: "Poppins",
+        titleFont: "Cormorant Garamond",
+        mood: "Creative",
+        moodEmoji: "😎",
+        location: "Ahmedabad, India 🇮🇳",
+        avatar: "",
+        banner: "",
+        music: "",
+        skills: "HTML, CSS, JavaScript, Firebase",
+        works: [],
+        socials: {},
+        customLinks: []
+      };
+
+      const fonts = {
+        "Poppins": "Poppins,sans-serif",
+        "Inter": "Inter,sans-serif",
+        "DM Sans": "\"DM Sans\",sans-serif",
+        "Space Grotesk": "\"Space Grotesk\",sans-serif",
+        "Playfair Display": "\"Playfair Display\",serif",
+        "Cormorant Garamond": "\"Cormorant Garamond\",serif"
+      };
+
+      const icons = {
+        pinterest: ["fa-brands fa-pinterest", "Pinterest"],
+        instagram: ["fa-brands fa-instagram", "Instagram"],
+        facebook: ["fa-brands fa-facebook-f", "Facebook"],
+        linkedin: ["fa-brands fa-linkedin-in", "LinkedIn"],
+        snapchat: ["fa-brands fa-snapchat", "Snapchat"],
+        tiktok: ["fa-brands fa-tiktok", "TikTok"],
+        github: ["fa-brands fa-github", "GitHub"],
+        youtube: ["fa-brands fa-youtube", "YouTube"],
+        discord: ["fa-brands fa-discord", "Discord"],
+        telegram: ["fa-brands fa-telegram", "Telegram"],
+        twitter: ["fa-brands fa-x-twitter", "X"],
+        threads: ["fa-brands fa-threads", "Threads"],
+        whatsapp: ["fa-brands fa-whatsapp", "WhatsApp"],
+        spotify: ["fa-brands fa-spotify", "Spotify"],
+        reddit: ["fa-brands fa-reddit-alien", "Reddit"],
+        email: ["fa-solid fa-envelope", "Email"],
+        website: ["fa-solid fa-globe", "Website"],
+        other: ["fa-solid fa-link", "Link"]
+      };
+
+      function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"]/g, character => {
+          return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;"
+          }[character];
+        });
+      }
+
+      function safeURL(value) {
+        const url = String(value || "").trim();
+
+        if (!url) return "";
+
+        return /^https?:\/\//i.test(url)
+          ? url
+          : "https://" + url;
+      }
+
+      function socialURL(platform, value) {
+        const link = String(value || "").trim();
+
+        if (platform === "email") {
+          return "mailto:" + link;
+        }
+
+        if (
+          platform === "whatsapp" &&
+          /^\+?\d[\d -]+$/.test(link)
+        ) {
+          return "https://wa.me/" + link.replace(/\D/g, "");
+        }
+
+        return safeURL(link);
+      }
+
+      function setAvatar(url) {
+        const avatar = $("avatar");
+        const image = $("avatarImg");
+
+        if (!url) {
+          avatar.classList.remove("has-img");
+          image.removeAttribute("src");
+          return;
+        }
+
+        avatar.classList.add("has-img");
+
+        image.onerror = () => {
+          avatar.classList.remove("has-img");
+          image.removeAttribute("src");
+        };
+
+        image.src = safeURL(url);
+      }
+
+      function setBanner(url) {
+        const image = $("bannerImg");
+        const fallback = $("fallback");
+
+        if (!url) {
+          image.classList.add("hide");
+          fallback.classList.remove("hide");
+          image.removeAttribute("src");
+          return;
+        }
+
+        image.onload = () => {
+          image.classList.remove("hide");
+          fallback.classList.add("hide");
+        };
+
+        image.onerror = () => {
+          image.classList.add("hide");
+          fallback.classList.remove("hide");
+          image.removeAttribute("src");
+        };
+
+        image.src = safeURL(url);
+      }
+
+      function getWorkImages(work) {
+        const images = [];
+
+        if (Array.isArray(work.images)) {
+          work.images.forEach(image => {
+            if (typeof image === "string" && image.trim()) {
+              images.push(image.trim());
+            }
+          });
+        }
+
+        if (
+          work.image &&
+          typeof work.image === "string" &&
+          !images.includes(work.image.trim())
+        ) {
+          images.unshift(work.image.trim());
+        }
+
+        return images;
+      }
+
+      function createWorkCard(work) {
+        const images = getWorkImages(work);
+
+        const photoHTML = images.map((image, index) => {
+          return `
+            <img
+              class="work-slide ${index === 0 ? "active" : ""}"
+              src="${escapeHTML(safeURL(image))}"
+              alt="${escapeHTML(work.title)} photo ${index + 1}"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            >
+          `;
+        }).join("");
+
+        const dotsHTML = images.length > 1
+          ? `
+            <div class="gallery-dots">
+              ${images.map((_, index) => `
+                <span class="gallery-dot ${index === 0 ? "active" : ""}"></span>
+              `).join("")}
+            </div>
+          `
+          : "";
+
+        const countHTML = images.length > 1
+          ? `
+            <span class="gallery-count">
+              <i class="fa-regular fa-images"></i>
+              <span class="galleryCurrent">1</span>/${images.length}
+            </span>
+          `
+          : "";
+
+        const nextHTML = images.length > 1
+          ? `
+            <button class="gallery-next" type="button">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          `
+          : "";
+
+        const galleryHTML = images.length
+          ? `
+            <div class="work-gallery">
+              ${photoHTML}
+              ${countHTML}
+              ${dotsHTML}
+              ${nextHTML}
+            </div>
+          `
+          : "";
+
+        const linkHTML = work.link
+          ? `
+            <a
+              class="work-link"
+              href="${escapeHTML(safeURL(work.link))}"
+              target="_blank"
+              rel="noopener"
+            >
+              View project
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          `
+          : "";
+
+        return `
+          <article class="work">
+            ${galleryHTML}
+
+            <div class="work-body">
+              <h3 class="work-title">
+                ${escapeHTML(work.title)}
+              </h3>
+
+              <p class="work-caption">
+                ${escapeHTML(work.caption || "")}
+              </p>
+
+              ${linkHTML}
+            </div>
+          </article>
+        `;
+      }
+
+      function startGalleries() {
+        document.querySelectorAll(".work-gallery").forEach(gallery => {
+          const slides = [...gallery.querySelectorAll(".work-slide")];
+          const dots = [...gallery.querySelectorAll(".gallery-dot")];
+          const count = gallery.querySelector(".galleryCurrent");
+          const nextButton = gallery.querySelector(".gallery-next");
+
+          if (slides.length < 2) return;
+
+          let active = 0;
+          let timer;
+
+          function show(index) {
+            active = index;
+
+            slides.forEach((slide, slideIndex) => {
+              slide.classList.toggle("active", slideIndex === active);
+            });
+
+            dots.forEach((dot, dotIndex) => {
+              dot.classList.toggle("active", dotIndex === active);
+            });
+
+            if (count) {
+              count.textContent = active + 1;
+            }
+          }
+
+          function next() {
+            show((active + 1) % slides.length);
+          }
+
+          function start() {
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+              next();
+            }, 3500);
+          }
+
+          function stop() {
+            clearInterval(timer);
+          }
+
+          if (nextButton) {
+            nextButton.addEventListener("click", event => {
+              event.preventDefault();
+              event.stopPropagation();
+
+              next();
+              start();
+            });
+          }
+
+          gallery.addEventListener("mouseenter", stop);
+          gallery.addEventListener("mouseleave", start);
+
+          gallery.addEventListener("touchstart", stop, {
+            passive: true
+          });
+
+          gallery.addEventListener("touchend", start, {
+            passive: true
+          });
+
+          show(0);
+          start();
+        });
+      }
+
+      function render(data) {
+        const profile = Object.assign({}, defaults, data || {});
+
+        const socials = Object.assign(
+          {},
+          defaults.socials,
+          (data && data.socials) || {}
+        );
+
+        document.body.className =
+          "theme-" + (
+            profile.theme === "default"
+              ? "default"
+              : "classic"
+          );
+
+        document.documentElement.style.setProperty(
+          "--body-font",
+          fonts[profile.profileFont] || fonts.Poppins
+        );
+
+        document.documentElement.style.setProperty(
+          "--title-font",
+          fonts[profile.titleFont] || fonts["Cormorant Garamond"]
+        );
+
+        $("name").textContent = profile.name || defaults.name;
+
+        $("tagline").textContent =
+          (Array.isArray(profile.taglines) && profile.taglines[0]) ||
+          profile.tagline ||
+          defaults.tagline;
+
+        $("letter").textContent =
+          (profile.name || defaults.name)
+            .trim()
+            .charAt(0)
+            .toUpperCase() || "A";
+
+        $("mood").textContent =
+          ((profile.moodEmoji || "") + " " + (profile.mood || "")).trim();
+
+        $("location").textContent =
+          profile.location ? "📍 " + profile.location : "";
+
+        $("bio").textContent = profile.bio || "";
+        $("profileText").textContent = profile.profileText || "";
+        $("workTitle").textContent = profile.workTitle || defaults.workTitle;
+        $("workText").textContent = profile.workText || defaults.workText;
+
+        setAvatar(profile.avatar);
+        setBanner(profile.banner);
+
+        $("skills").innerHTML = String(profile.skills || "")
+          .split(",")
+          .map(skill => skill.trim())
+          .filter(Boolean)
+          .map(skill => `<span class="skill">${escapeHTML(skill)}</span>`)
+          .join("");
+
+        const works = Array.isArray(profile.works)
+          ? profile.works
+          : [];
+
+        $("works").innerHTML =
+          works
+            .filter(work => work && work.title)
+            .map(createWorkCard)
+            .join("") ||
+          `
+            <div class="empty">
+              Work cards will appear here after they are added from the admin panel.
+            </div>
+          `;
+
+        startGalleries();
+
+        let socialHTML = "";
+
+        Object.entries(icons).forEach(([platform, details]) => {
+          const value = String(socials[platform] || "").trim();
+
+          if (!value) return;
+
+          socialHTML += `
+            <a
+              class="social"
+              href="${escapeHTML(socialURL(platform, value))}"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="${details[0]}"></i>
+              ${details[1]}
+            </a>
+          `;
+        });
+
+        $("socials").innerHTML = socialHTML;
+        $("socialWrap").classList.toggle("hide", !socialHTML);
+
+        const customLinks = Array.isArray(profile.customLinks)
+          ? profile.customLinks
+          : [];
+
+        const customHTML = customLinks
+          .filter(item => item && item.label && item.url)
+          .map(item => `
+            <a
+              class="social"
+              href="${escapeHTML(safeURL(item.url))}"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              ${escapeHTML(item.label)}
+            </a>
+          `)
+          .join("");
+
+        $("customLinks").innerHTML = customHTML;
+        $("customWrap").classList.toggle("hide", !customHTML);
+
+        const audio = $("audio");
+        const musicButton = $("music");
+
+        if (profile.music) {
+          audio.src = safeURL(profile.music);
+          musicButton.classList.remove("hide");
+        } else {
+          audio.pause();
+          audio.removeAttribute("src");
+          musicButton.classList.add("hide");
+          musicButton.classList.remove("playing");
+        }
+
+        $("loader").classList.add("done");
+      }
+
+      let playing = false;
+
+      $("music").addEventListener("click", () => {
+        const audio = $("audio");
+        const button = $("music");
+
+        if (playing) {
+          audio.pause();
+          playing = false;
+          button.classList.remove("playing");
+          return;
+        }
+
+        audio.play()
+          .then(() => {
+            playing = true;
+            button.classList.add("playing");
+          })
+          .catch(() => {});
+      });
+
+      try {
+        if (!window.firebase || !firebase.apps || !firebase.apps.length) {
+          throw new Error("Firebase is not initialized.");
+        }
+
+        firebase.database().ref("profile").on(
+          "value",
+          snapshot => {
+            render(snapshot.val());
+          },
+          error => {
+            console.error(error);
+            render(null);
+          }
+        );
+      } catch (error) {
+        console.error(error);
+        render(null);
+      }
+    })();
+  </script>
+
+</body>
+</html>
       --shadow:rgba(46,35,21,.12);
       --body-font:Poppins,sans-serif;
       --title-font:"Cormorant Garamond",serif;
