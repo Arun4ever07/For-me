@@ -79,6 +79,7 @@
       color:var(--muted);
       font-size:11px;
       letter-spacing:1px;
+      text-align:center;
     }
 
     .page{
@@ -92,7 +93,6 @@
     }
 
     .panel{
-      position:relative;
       overflow:visible;
       border:1px solid var(--line);
       border-radius:12px;
@@ -135,37 +135,34 @@
     }
 
     /*
-      Discord profile-picture layout:
+      Original layout restored.
 
-      Banner height: 230px
-      Avatar height: 160px
-      Avatar top: -80px
-
-      80px stays inside banner.
-      80px stays below banner.
+      Profile picture:
+      - 160px large
+      - 80px overlaps upward on banner
+      - 3px thin border
     */
     .head{
       position:relative;
-      min-height:170px;
-      padding:92px 20px 20px 196px;
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      min-height:178px;
+      padding:0 20px 20px;
     }
 
     .avatar{
-      position:absolute;
-      z-index:10;
-      top:-80px;
-      left:20px;
-
+      position:relative;
+      z-index:5;
       width:160px;
       height:160px;
-
+      flex:none;
+      margin-top:-80px;
       overflow:hidden;
-      border:6px solid var(--card);
+      border:3px solid var(--card);
       border-radius:50%;
-
       background:#37244d;
       box-shadow:0 16px 34px rgba(0,0,0,.33);
-
       transition:transform .3s ease,box-shadow .3s ease;
     }
 
@@ -201,6 +198,7 @@
 
     .identity{
       min-width:0;
+      padding-bottom:3px;
     }
 
     .name{
@@ -316,6 +314,10 @@
       box-shadow:0 16px 30px var(--shadow);
     }
 
+    .work:active{
+      transform:translateY(-1px) scale(.985);
+    }
+
     .work-gallery{
       position:relative;
       width:100%;
@@ -324,12 +326,19 @@
       line-height:0;
     }
 
+    /*
+      Full Work images.
+      No fixed image height.
+      No crop.
+      No forced 16:10 ratio.
+    */
     .work-slide{
       display:none;
       width:100%;
       height:auto;
       max-width:100%;
       object-fit:contain;
+      background:#101116;
     }
 
     .work-slide.active{
@@ -378,6 +387,7 @@
       height:5px;
       border-radius:50%;
       background:rgba(255,255,255,.45);
+      transition:.25s ease;
     }
 
     .gallery-dot.active{
@@ -408,6 +418,10 @@
       opacity:1;
     }
 
+    .gallery-next:hover{
+      transform:translateY(-50%) scale(1.1);
+    }
+
     .work-body{
       padding:14px;
     }
@@ -433,6 +447,14 @@
       font-size:10px;
       font-weight:600;
       text-decoration:none;
+    }
+
+    .work-link i{
+      transition:transform .25s ease;
+    }
+
+    .work:hover .work-link i{
+      transform:translate(2px,-2px);
     }
 
     .empty{
@@ -490,6 +512,7 @@
       color:#fff;
       cursor:pointer;
       font-size:17px;
+      box-shadow:0 8px 22px rgba(0,0,0,.25);
     }
 
     .music.playing{
@@ -525,16 +548,16 @@
       }
 
       .head{
-        min-height:145px;
-        padding:78px 13px 16px 160px;
+        min-height:156px;
+        gap:12px;
+        padding:0 13px 16px;
       }
 
       .avatar{
-        top:-66px;
-        left:13px;
         width:132px;
         height:132px;
-        border-width:5px;
+        margin-top:-66px;
+        border-width:3px;
       }
 
       .name{
@@ -596,6 +619,7 @@
 
       <div class="content">
         <div class="label">About me</div>
+
         <p id="bio" class="bio"></p>
 
         <div class="bar"></div>
@@ -635,6 +659,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
   <script src="firebase-config.js"></script>
 
   <script>
@@ -693,7 +718,7 @@
         other: ["fa-solid fa-link", "Link"]
       };
 
-      let loaded = false;
+      let hasLoaded = false;
       let playing = false;
 
       function escapeHTML(value) {
@@ -710,7 +735,9 @@
       function safeURL(value) {
         const url = String(value || "").trim();
 
-        if (!url) return "";
+        if (!url) {
+          return "";
+        }
 
         return /^https?:\/\//i.test(url)
           ? url
@@ -798,8 +825,8 @@
         }
 
         if (
-          work.image &&
           typeof work.image === "string" &&
+          work.image.trim() &&
           !images.includes(work.image.trim())
         ) {
           images.unshift(work.image.trim());
@@ -833,7 +860,7 @@
           `
           : "";
 
-        const counter = images.length > 1
+        const count = images.length > 1
           ? `
             <span class="gallery-count">
               <span class="galleryCurrent">1</span>/${images.length}
@@ -853,14 +880,14 @@
           ? `
             <div class="work-gallery">
               ${slides}
-              ${counter}
+              ${count}
               ${dots}
               ${nextButton}
             </div>
           `
           : "";
 
-        const projectLink = work.link
+        const link = work.link
           ? `
             <a
               class="work-link"
@@ -885,7 +912,7 @@
                 ${escapeHTML(work.caption || "")}
               </p>
 
-              ${projectLink}
+              ${link}
             </div>
           </article>
         `;
@@ -898,7 +925,9 @@
           const number = gallery.querySelector(".galleryCurrent");
           const nextButton = gallery.querySelector(".gallery-next");
 
-          if (slides.length < 2) return;
+          if (slides.length < 2) {
+            return;
+          }
 
           let current = 0;
           let timer;
@@ -966,7 +995,7 @@
       }
 
       function render(data) {
-        loaded = true;
+        hasLoaded = true;
 
         const profile = Object.assign({}, defaults, data || {});
         const socials = Object.assign(
@@ -1014,8 +1043,11 @@
 
         $("bio").textContent = profile.bio || "";
         $("profileText").textContent = profile.profileText || "";
-        $("workTitle").textContent = profile.workTitle || defaults.workTitle;
-        $("workText").textContent = profile.workText || defaults.workText;
+        $("workTitle").textContent =
+          profile.workTitle || defaults.workTitle;
+
+        $("workText").textContent =
+          profile.workText || defaults.workText;
 
         setAvatar(profile.avatar);
         setBanner(profile.banner);
@@ -1024,9 +1056,7 @@
           .split(",")
           .map(skill => skill.trim())
           .filter(Boolean)
-          .map(skill => `
-            <span class="skill">${escapeHTML(skill)}</span>
-          `)
+          .map(skill => `<span class="skill">${escapeHTML(skill)}</span>`)
           .join("");
 
         const works = Array.isArray(profile.works)
@@ -1051,7 +1081,9 @@
         Object.entries(icons).forEach(([platform, details]) => {
           const value = String(socials[platform] || "").trim();
 
-          if (!value) return;
+          if (!value) {
+            return;
+          }
 
           socialHTML += `
             <a
@@ -1127,7 +1159,7 @@
       });
 
       setTimeout(() => {
-        if (!loaded) {
+        if (!hasLoaded) {
           $("loadingText").textContent =
             "Profile connection is taking too long.";
 
