@@ -11,9 +11,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Typography: Profile fonts + Cutout Collage Fonts -->
+  <!-- Typography: Profile fonts + Hand-Drawn Marker & Mono Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Caveat:wght@700&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,600;0,700;1,700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Special+Elite&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Caveat:wght@700&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,600;0,700;1,700&family=Poppins:wght@400;500;600;700&family=Rubik+Marker+Hatch&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@700&family=Special+Elite&display=swap"
     rel="stylesheet"
   >
 
@@ -62,18 +62,19 @@
     }
 
     /* ========================================================
-       ANIMATED "HAPPY BIRTHDAY TO ME" INTRO SCREEN
+       SEAMLESS INTRO: "THE ACT OF CREATING SOMETHING"
        ======================================================== */
     .loader{
       position:fixed;
       z-index:999;
       inset:0;
       display:flex;
-      flex-direction:column;
       align-items:center;
       justify-content:center;
-      background:#faf7f2;
-      transition:opacity .65s cubic-bezier(0.4, 0, 0.2, 1), visibility .65s;
+      background:var(--paper);
+      transition:opacity .7s cubic-bezier(0.4, 0, 0.2, 1), visibility .7s;
+      overflow:hidden;
+      padding:24px 16px;
     }
 
     .loader.done{
@@ -82,54 +83,142 @@
       pointer-events:none;
     }
 
-    .hbd-container{
+    /* Seamless Non-Isolated Canvas Wrapper */
+    .art-stage{
+      position:relative;
+      max-width:680px;
+      width:100%;
+      background:transparent;
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:14px;
-      padding:24px 14px;
+      justify-content:center;
       user-select:none;
     }
 
-    .hbd-row{
+    /* Organic Floating Doodles */
+    .doodle{
+      position:absolute;
+      pointer-events:none;
+      opacity:0;
+      animation:doodleFade .8s ease forwards;
+    }
+
+    .doodle-loop{
+      top:-16px;
+      right:8%;
+      width:clamp(75px, 15vw, 115px);
+      height:clamp(70px, 14vw, 105px);
+      animation-delay:.45s;
+    }
+
+    .doodle-flower{
+      bottom:22%;
+      left:2%;
+      width:clamp(44px, 9vw, 62px);
+      height:clamp(44px, 9vw, 62px);
+      animation-delay:.6s;
+    }
+
+    .doodle-star{
+      bottom:10%;
+      right:4%;
+      width:clamp(75px, 15vw, 110px);
+      height:clamp(75px, 15vw, 110px);
+      animation-delay:.75s;
+    }
+
+    .sparkle{
+      position:absolute;
+      color:#b77be0;
+      font-size:clamp(18px, 4vw, 26px);
+      line-height:1;
+      opacity:0;
+      animation:sparklePop .6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .sparkle-1{ top:18%; left:5%; animation-delay:.35s; }
+    .sparkle-2{ top:34%; right:4%; animation-delay:.65s; }
+
+    @keyframes doodleFade{
+      to{ opacity:0.9; }
+    }
+
+    @keyframes sparklePop{
+      0%{ opacity:0; transform:scale(0) rotate(-45deg); }
+      100%{ opacity:0.95; transform:scale(1) rotate(0deg); }
+    }
+
+    /* Kinetic Lettering Container */
+    .quote-content{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      width:100%;
+    }
+
+    .art-row{
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:clamp(4px, 1.2vw, 8px);
       flex-wrap:nowrap;
+      line-height:1.02;
     }
 
-    .hbd-spacer{
-      width:clamp(10px, 2.5vw, 20px);
+    .row-act{
+      font-family:"Permanent Marker", cursive, sans-serif;
+      color:#e52229;
+      font-size:clamp(28px, 7.5vw, 64px);
+      letter-spacing:clamp(1px, 0.3vw, 3px);
+      margin-bottom:clamp(2px, 0.8vw, 6px);
     }
 
-    .tile{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:clamp(36px, 8vw, 68px);
-      height:clamp(44px, 10vw, 84px);
-      border-radius:3px;
-      box-shadow:0 6px 16px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.12);
-      transform:rotate(var(--r, 0deg));
-      font-size:clamp(26px, 6.2vw, 54px);
-      font-weight:700;
+    .row-creating{
+      font-family:"Rubik Marker Hatch", "Permanent Marker", cursive, sans-serif;
+      color:#e52229;
+      font-size:clamp(42px, 11.8vw, 98px);
+      letter-spacing:clamp(1.5px, 0.6vw, 5px);
+      font-weight:900;
+      line-height:0.95;
+      text-shadow:0.5px 0.5px 0 #cc171e, -0.5px -0.5px 0 #ff4a50;
+    }
+
+    .row-something{
+      font-family:"Rubik Marker Hatch", "Permanent Marker", cursive, sans-serif;
+      color:#e52229;
+      font-size:clamp(32px, 8.8vw, 74px);
+      letter-spacing:clamp(1px, 0.5vw, 4px);
+      font-weight:900;
       line-height:1;
-      position:relative;
-      opacity:0;
-      animation:
-        tilePopIn .55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-        tileFloat 3.2s ease-in-out infinite alternate;
-      animation-delay:var(--d, 0s), calc(var(--d, 0s) + .55s);
+      margin-top:clamp(2px, 0.8vw, 6px);
+      text-shadow:0.5px 0.5px 0 #cc171e;
     }
 
-    @keyframes tilePopIn{
+    .letter-span{
+      display:inline-block;
+      opacity:0;
+      transform:translateY(28px) scale(.75) rotate(calc(var(--r, 0deg) * 2));
+      animation:
+        letterSpring .52s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards,
+        letterFloat 3.4s ease-in-out infinite alternate;
+      animation-delay:var(--d, 0s), calc(var(--d, 0s) + .52s);
+    }
+
+    .letter-space{
+      display:inline-block;
+      width:clamp(8px, 2.2vw, 20px);
+    }
+
+    @keyframes letterSpring{
       0%{
         opacity:0;
-        transform:translateY(36px) scale(.45) rotate(calc(var(--r, 0deg) * 2.8));
+        transform:translateY(28px) scale(.7) rotate(calc(var(--r, 0deg) * 2));
       }
-      75%{
-        transform:translateY(-5px) scale(1.08) rotate(var(--r, 0deg));
+      70%{
+        transform:translateY(-4px) scale(1.06) rotate(var(--r, 0deg));
       }
       100%{
         opacity:1;
@@ -137,12 +226,66 @@
       }
     }
 
-    @keyframes tileFloat{
+    @keyframes letterFloat{
       0%{
         transform:translateY(0) rotate(var(--r, 0deg));
       }
       100%{
-        transform:translateY(-5px) rotate(calc(var(--r, 0deg) + 1.2deg));
+        transform:translateY(-4px) rotate(calc(var(--r, 0deg) + 0.8deg));
+      }
+    }
+
+    /* Subtext: "IS ALWAYS MORE IMPORTANT THAN THE RESULT" */
+    .art-subtext{
+      margin-top:clamp(16px, 3.8vw, 30px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      font-family:"Space Mono", "Space Grotesk", monospace;
+      color:#8f6cd4;
+      font-size:clamp(10px, 2.5vw, 17px);
+      font-weight:700;
+      letter-spacing:clamp(1.5px, 0.4vw, 3.5px);
+      text-transform:uppercase;
+      opacity:0;
+      animation:subtextIn .7s ease forwards;
+      animation-delay:1.1s;
+    }
+
+    .subtext-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:clamp(6px, 1.6vw, 14px);
+      white-space:nowrap;
+    }
+
+    .subtext-underline{
+      position:relative;
+      display:inline-block;
+    }
+
+    .subtext-underline::after{
+      content:"";
+      position:absolute;
+      left:-4px;
+      right:-4px;
+      bottom:-3px;
+      height:2.5px;
+      background:#be84e6;
+      border-radius:2px;
+      transform:rotate(-0.8deg);
+    }
+
+    @keyframes subtextIn{
+      0%{
+        opacity:0;
+        transform:translateY(14px);
+      }
+      100%{
+        opacity:1;
+        transform:translateY(0);
       }
     }
 
@@ -629,40 +772,82 @@
 
 <body class="theme-classic">
 
-  <!-- ANIMATED INTRO SCREEN: HAPPY BIRTHDAY TO ME -->
+  <!-- ANIMATED INTRO SCREEN: THE ACT OF CREATING SOMETHING -->
   <div id="loader" class="loader">
-    <div class="hbd-container">
+    <div class="art-stage">
 
-      <!-- ROW 1: HAPPY -->
-      <div class="hbd-row">
-        <span class="tile" style="--r:-4deg; --d:0.04s; background:#e71d6b; color:#ffe534; font-family:'Alfa Slab One', cursive;">H</span>
-        <span class="tile" style="--r:3deg; --d:0.12s; background:#f2eee6; color:#171513; font-family:'Playfair Display', serif; font-style:italic;">a</span>
-        <span class="tile" style="--r:-2.5deg; --d:0.20s; background:#0197d9; color:#fba8ca; font-family:'DM Sans', sans-serif; -webkit-text-stroke:1px #ffffff;">p</span>
-        <span class="tile" style="--r:3.5deg; --d:0.28s; background:#581749; color:#fcf9f2; font-family:'Abril Fatface', serif;">p</span>
-        <span class="tile" style="--r:-2deg; --d:0.36s; background:#6ea242; color:#ffffff; font-family:'Permanent Marker', cursive;">y</span>
-      </div>
+      <!-- Hand-drawn background doodles seamlessly integrated -->
+      <svg class="doodle doodle-loop" viewBox="0 0 100 90" fill="none" stroke="#d5b244" stroke-width="2.5" stroke-linecap="round">
+        <path d="M15,65 C5,15 70,5 65,45 C60,80 18,75 50,85 C80,92 90,40 75,20" />
+      </svg>
 
-      <!-- ROW 2: BIRTHDAY -->
-      <div class="hbd-row">
-        <span class="tile" style="--r:-3deg; --d:0.44s; background:#3f1d52; color:#ffffff; font-family:'Abril Fatface', serif;">B</span>
-        <span class="tile" style="--r:2.5deg; --d:0.51s; background:#e8dfd2; color:#e92a7e; font-family:'Alfa Slab One', cursive; text-shadow:2px 2px 0 #1b1a18;">i</span>
-        <span class="tile" style="--r:-3.5deg; --d:0.58s; background:#f5efe2; color:#f5aa01; font-family:'Alfa Slab One', cursive;">r</span>
-        <span class="tile" style="--r:2deg; --d:0.65s; background:#bd3e6a; color:#fbd5e2; font-family:'DM Sans', sans-serif;">t</span>
-        <span class="tile" style="--r:-4deg; --d:0.72s; background:#f5bd19; color:#03528b; font-family:'Caveat', cursive; font-size:clamp(32px, 7vw, 64px);">h</span>
-        <span class="tile" style="--r:2.5deg; --d:0.79s; background:#025197; color:#ffffff; font-family:'DM Sans', sans-serif;">d</span>
-        <span class="tile" style="--r:-2deg; --d:0.86s; background:#432560; color:#ffffff; font-family:'Special Elite', cursive;">a</span>
-        <span class="tile" style="--r:3.5deg; --d:0.93s; background:#dd2467; color:#fff042; font-family:'Alfa Slab One', cursive;">y</span>
-      </div>
+      <svg class="doodle doodle-flower" viewBox="0 0 55 55" fill="none" stroke="#b164cf" stroke-width="2.5" stroke-linecap="round">
+        <path d="M27,27 C20,15 10,20 18,27 C10,32 15,45 25,33 C27,45 42,42 33,30 C45,28 42,12 30,22 C32,10 18,12 27,27 Z" />
+      </svg>
 
-      <!-- ROW 3: TO ME -->
-      <div class="hbd-row">
-        <span class="tile" style="--r:-3deg; --d:1.02s; background:#1b8c73; color:#ffffff; font-family:'Abril Fatface', serif;">T</span>
-        <span class="tile" style="--r:2deg; --d:1.09s; background:#f18b56; color:#ffffff; font-family:'DM Sans', sans-serif;">o</span>
-        
-        <div class="hbd-spacer"></div>
+      <svg class="doodle doodle-star" viewBox="0 0 90 90" fill="none" stroke="#ba68c8" stroke-width="2.5" stroke-linejoin="round">
+        <polygon points="45,5 57,32 86,36 65,56 70,85 45,71 20,85 25,56 4,36 33,32" />
+      </svg>
 
-        <span class="tile" style="--r:-3.5deg; --d:1.18s; background:#2c3272; color:#ffd037; font-family:'Alfa Slab One', cursive;">M</span>
-        <span class="tile" style="--r:3deg; --d:1.25s; background:#e64a38; color:#ffffff; font-family:'Permanent Marker', cursive;">e</span>
+      <span class="sparkle sparkle-1">✦</span>
+      <span class="sparkle sparkle-2">✦</span>
+
+      <!-- The Animated Kinetic Lettering -->
+      <div class="quote-content">
+
+        <!-- ROW 1: THE ACT OF -->
+        <div class="art-row row-act">
+          <span class="letter-span" style="--r:-2.5deg; --d:0.04s;">T</span>
+          <span class="letter-span" style="--r:1.8deg;  --d:0.08s;">H</span>
+          <span class="letter-span" style="--r:-1.5deg; --d:0.12s;">E</span>
+          <span class="letter-space"></span>
+          <span class="letter-span" style="--r:2.2deg;  --d:0.18s;">A</span>
+          <span class="letter-span" style="--r:-2deg;   --d:0.22s;">C</span>
+          <span class="letter-span" style="--r:1.6deg;  --d:0.26s;">T</span>
+          <span class="letter-space"></span>
+          <span class="letter-span" style="--r:-2.4deg; --d:0.32s;">O</span>
+          <span class="letter-span" style="--r:2.8deg;  --d:0.36s;">F</span>
+        </div>
+
+        <!-- ROW 2: CREATING -->
+        <div class="art-row row-creating">
+          <span class="letter-span" style="--r:-3.5deg; --d:0.42s;">C</span>
+          <span class="letter-span" style="--r:1.8deg;  --d:0.48s;">R</span>
+          <span class="letter-span" style="--r:-2.2deg; --d:0.54s;">E</span>
+          <span class="letter-span" style="--r:3deg;    --d:0.60s;">A</span>
+          <span class="letter-span" style="--r:-1.8deg; --d:0.66s;">T</span>
+          <span class="letter-span" style="--r:2.4deg;  --d:0.72s;">I</span>
+          <span class="letter-span" style="--r:-2.8deg; --d:0.78s;">N</span>
+          <span class="letter-span" style="--r:3.2deg;  --d:0.84s;">G</span>
+        </div>
+
+        <!-- ROW 3: SOMETHING -->
+        <div class="art-row row-something">
+          <span class="letter-span" style="--r:-2.5deg; --d:0.90s;">S</span>
+          <span class="letter-span" style="--r:2.2deg;  --d:0.94s;">O</span>
+          <span class="letter-span" style="--r:-1.8deg; --d:0.98s;">M</span>
+          <span class="letter-span" style="--r:2.6deg;  --d:1.02s;">E</span>
+          <span class="letter-span" style="--r:-2.2deg; --d:1.06s;">T</span>
+          <span class="letter-span" style="--r:1.8deg;  --d:1.10s;">H</span>
+          <span class="letter-span" style="--r:-1.4deg; --d:1.14s;">I</span>
+          <span class="letter-span" style="--r:2.4deg;  --d:1.18s;">N</span>
+          <span class="letter-span" style="--r:-3deg;   --d:1.22s;">G</span>
+        </div>
+
+        <!-- ROW 4: SUBTEXT FROM ARTWORK -->
+        <div class="art-subtext">
+          <div class="subtext-row">
+            <span>IS ALWAYS</span>
+            <span>MORE</span>
+            <span>IMPORTANT</span>
+          </div>
+          <div class="subtext-row">
+            <span class="subtext-underline">THAN</span>
+            <span>THE</span>
+            <span>RESULT</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -806,9 +991,9 @@
       let hasLoaded = false;
       let playing = false;
 
-      // Ensures the celebration animation plays fully before fading into page
+      // Allows animation sequence to play through gracefully before fading to main content
       const loadStartTime = Date.now();
-      const minDisplayDuration = 2400;
+      const minDisplayDuration = 2600;
 
       function escapeHTML(value) {
         return String(value ?? "").replace(/[&<>"]/g, character => {
